@@ -41,6 +41,11 @@ body {
   justify-content: flex-end;
 }
 
+.nav-conteudo > nav > ul > li:hover {
+  transition: all 100ms ease-in-out;
+  transform: scale(1.05);
+}
+
 .nav-conteudo > nav > ul > li {
   border: 2px solid white;
   box-shadow: 1px 1px white;
@@ -70,6 +75,12 @@ body {
 .container-cogus {
   display: flex;
   gap: 20em;
+}
+
+.cogu-center:hover {
+  color: red;
+  transition: all 100ms ease-in-out;
+  transform: scale(1.05);
 }
 
 .cogu-center {

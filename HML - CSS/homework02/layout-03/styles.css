@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+section {
+  display: flex;
+}
+
+/* coluna1 */
+
+.container {
+  padding-top: 40px;
+}
+
+.coluna1 {
+  max-width: 800px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.coluna1 img {
+  width: 800px;
+}
+
+.coluna1 > img + p {
+  padding-top: 20px;
+}
+
+/* coluna2 */
+
+.coluna2 > div {
+  max-width: 300px;
+  margin-left: 20px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.coluna2 > div {
+  padding-bottom: 40px;
+}

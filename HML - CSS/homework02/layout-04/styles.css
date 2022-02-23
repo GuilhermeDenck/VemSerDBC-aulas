@@ -1,0 +1,46 @@
+section {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 40px;
+}
+
+img {
+  max-width: 100%;
+  height: 100%;
+}
+
+/* principal */
+
+.dogao img {
+  height: 91%;
+  width: 560px;
+  display: block;
+  margin-top: 10px;
+}
+
+/* lateral */
+
+.dogs img {
+  height: 260px;
+  display: block;
+  margin-top: 10px;
+}
+
+.dogs {
+  margin: 0px 10px;
+}
+
+/* banners */
+
+.banner {
+  width: 100%;
+  height: 50px;
+  background-color: #2C2C2C;
+  display: flex;
+  align-items: center;
+}
+
+.banner > p {
+  padding: 20px;
+  color: white;
+}

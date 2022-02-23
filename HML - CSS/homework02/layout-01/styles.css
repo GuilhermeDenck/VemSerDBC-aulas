@@ -1,0 +1,60 @@
+.container-dogs {
+  display: flex;
+  margin-top: 40px;
+}
+
+.container-dogs div + div {
+  margin-left: 20px;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* linha 2 */
+
+
+/* lado1 */
+.container-propagandas {
+  display: flex;
+  margin-top: 20px;
+}
+
+.lado1 {
+  width: 380px;
+  height: 350px;
+  text-align: center;
+}
+
+.box {
+  width: 380px;
+  height: 350px;
+  border: 3px solid black;
+}
+
+/* lado2 */
+.lado2 {
+  display: flex;
+  max-width: 814px;
+  height: 450px;
+}
+
+.coluna1 div + div , .coluna2 div + div {
+  padding-top: 20px;
+}
+
+.lado2 img {
+  max-width: 60%;
+  padding-right: 10px;
+}
+
+.coluna1 > div, .coluna2 > div {
+  display: flex;
+  align-items: center;
+}
+
+.coluna1, .coluna2 {
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px
+}

@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+  display: inline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-flex {
+  display: flex;
+}

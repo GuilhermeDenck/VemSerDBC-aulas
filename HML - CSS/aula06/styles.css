@@ -1,0 +1,32 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 200px auto 100px;
+  gap: 50px 20px;
+}
+
+.grid-item{
+  background-color: red;
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .grid-container {
+    grid-template-columns: auto auto;
+    gap: 30px 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: auto;
+    gap: 5px;
+  }
+}

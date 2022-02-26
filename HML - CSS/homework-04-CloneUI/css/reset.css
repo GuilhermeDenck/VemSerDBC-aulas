@@ -1,0 +1,13 @@
+:root {
+  --blue10: #18A0FB;
+  --gray10: #E5E5E5;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: 'Montserrat';
+  scroll-behavior: smooth;
+}

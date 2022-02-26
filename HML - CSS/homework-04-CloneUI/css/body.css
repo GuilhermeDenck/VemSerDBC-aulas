@@ -1,0 +1,201 @@
+img {
+  width: 100%;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+}
+
+h4 {
+  width: 686px;
+  height: 36px;
+  font-size: 24px;
+}
+
+p {
+  width: 686px;
+  height: 90px;
+  font-size: 18px;
+}
+
+.hero {
+  background-color: var(--gray10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 56px;
+  text-align: center;
+  margin-top: 86px;
+  font-weight: normal;
+}
+
+.hero input[type=button] {
+  width: 192px;
+  height: 52px;
+  margin-top: 40px;
+  border-radius: 6px;
+  background-color: var(--blue10);
+  color: white;
+  border: none;
+}
+
+/* Features */
+
+.features {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-features {
+  width: 750px;
+  height: 144px;
+  margin-top: 120px;
+  margin-left: 80px;
+}
+
+.title-features > h1 {
+  font-size: 48px;
+  font-weight: normal;
+}
+
+.texts-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 60px;
+  margin-left: 80px;
+}
+
+.texts-features > div {
+  width: 686px;
+  align-self: center;
+}
+
+.texts-features div  {
+  margin-bottom: 70px;
+}
+
+.texts-features div > p {
+  font-weight: normal;
+  margin-top: 20px;
+}
+
+.texts-features div > input[type=button] {
+  width: 130px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid var(--blue10);
+  color: var(--blue10);
+}
+
+/* pricing */
+
+.pricing {
+  display: flex;
+  align-items: center;
+}
+
+.pricing > figure {
+  width: 50%;
+  margin: 80px
+}
+
+.pricing > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.pricing-2 {
+  display: flex;
+  align-items: center;
+  background-color:  var(--gray10);
+  flex-direction: row-reverse;
+}
+
+.pricing-2 > figure {
+  width: 50%;
+  margin: 80px
+}
+
+.pricing-2 > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* community */
+
+.community {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.community h1 {
+  font-size: 48px;
+  font-weight: normal;
+  padding-top: 120px;
+  text-align: center;
+}
+
+.community p {
+  width: 1392px;
+  height: 100px;
+  font-size: 36px;
+  font-weight: normal;
+  letter-spacing: -1.5%;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.community div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 90px;
+  margin-top: 80px;
+}
+
+.community div figure {
+  width: 300px;
+  height: 150px;
+}
+
+/* support */
+
+.support {
+  width: 100%;
+  height: 35vh;
+  background-color: var(--gray10);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.support p {
+  width: 934px;
+  height: 100px;
+  font-size: 36px;
+}
+
+.support > div input[type=button] {
+  width: 192px;
+  height: 52px;
+  background-color: var(--blue10);
+  color: white;
+  border: none;
+  margin-right: 45px;
+}
+
+.support > div input[type=button]:last-child {
+  background-color: transparent;
+  border: 1px solid var(--blue10);
+  color: var(--blue10);
+}

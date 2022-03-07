@@ -1,3 +1,3 @@
 # VemSerDBC-JavaScript
 
-## Módulo de JavaScript
+Módulo de JavaScript

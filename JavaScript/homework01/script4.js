@@ -12,9 +12,7 @@ let isInfinity = number1 / number2 === Infinity ;
 
 if(!isNumber) {
   confirm('Digite algum número válidos');
-}
-
-if(isNumber) {
+} else {
   switch(operation) {
     case '+':
       alert(`Resultado da soma de ${number1} + ${number2} é igual a: ${number1 + number2}`);

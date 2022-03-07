@@ -1,0 +1,46 @@
+nav ul li {
+  display: inline;
+  margin-right: 80px;
+}
+
+nav ul li::before {
+  content: '';
+  display: inline;
+  width: 20px;
+  height: 20px;
+  background-color: #fff; /* img */
+  background-size: contain;
+}
+
+nav ul li::after {
+  content: '';
+  display: inline;
+  width: 20px;
+  height: 20px;
+  background-color: #fff; /* img */
+  background-size: contain;
+}
+
+.container p:first-child {
+  color: red;
+}
+
+.container p:last-child {
+  color: red;
+}
+
+.container p:nth-child(2) { /* segundo parágrafo */
+  color: red;
+}
+
+.container p:nth-child(even) { /* Para cada parágrafo, se o número for par */
+  color: red;
+}
+
+.container p:nth-child(odd) { /* Para cada parágrafo, se o número for ímpar */
+  color: blue;
+}
+
+.container p:nth-child(3n) { /* Para cada parágrafo, se o número for 3 */
+  color: green;
+}

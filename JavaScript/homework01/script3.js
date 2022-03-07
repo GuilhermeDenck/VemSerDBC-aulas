@@ -10,4 +10,4 @@ let isFriday = confirm('Hoje é sexta-feira?');
 let isTwoGreaterThanFour = 2 > 4;
 
 let userResponse = prompt('Digite algo:');
-let isValueEmpty = userResponse === null || userResponse === undefined || userResponse === undefined;
+let isValueEmpty = userResponse === null || userResponse === undefined || userResponse === '';

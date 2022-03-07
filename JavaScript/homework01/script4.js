@@ -8,17 +8,13 @@ let operation = prompt('Digite a operação desejada: ');
 let number2 = parseFloat(prompt('Digite o segundo valor: '));
 
 let isNumber = !isNaN(number1) && !isNaN(number2);
-let isInfinity = operation === '/' && number1 / number2 === Infinity;
+let isInfinity = number1 / number2 === Infinity ;
 
 if(!isNumber) {
   confirm('Digite algum número válidos');
 }
 
-if(isInfinity) {
-  confirm('Não é possível dividir por zero');
-}
-
-if(isNumber && !isInfinity === true) {
+if(isNumber) {
   switch(operation) {
     case '+':
       alert(`Resultado da soma de ${number1} + ${number2} é igual a: ${number1 + number2}`);
@@ -30,7 +26,11 @@ if(isNumber && !isInfinity === true) {
       alert(`Resultado da multiplicação de ${number1} * ${number2} é igual a: ${number1 * number2}`);
       break;
     case '/':
-      alert(`Resultado da divisão de ${number1} / ${number2} é igual a: ${number1 / number2}`);
+      if(isInfinity) {
+        alert('Não é possível dividir por zero');
+      } else {
+        alert(`Resultado da divisão de ${number1} / ${number2} é igual a: ${number1 / number2}`);
+      }
       break;
     default:
       alert('Operação inválida');

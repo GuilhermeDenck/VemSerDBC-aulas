@@ -4,22 +4,20 @@
 // 	Ao selecionar finalizar mostre um alerta para o usuário com o resultado da soma de todos os números informados
 // 	Utilize o laço DO...WHILE;
 
-let userQuestionNumber = parseInt(prompt('1 - Inserir número\n2 - Finalizar'))
-
 let countUserNumbers = 0;
-let numberArry = [];
+let numberArray = [];
 
 do {
-    while (userQuestionNumber === 1) {
-      let numberSelect = parseInt(prompt('Digite um numero: '));
-      userQuestionNumber = parseInt(prompt('1 - Inserir número\n2 - Finalizar'))
+  userQuestionNumber = parseInt(prompt('1 - Inserir número\n2 - Finalizar'))
+  if(userQuestionNumber === 1) {
+    let numberSelect = parseInt(prompt('Digite um numero: '));    
       if (!isNaN(numberSelect)) {
-        numberArry.push(numberSelect)
-        countUserNumbers += numberSelect
-      }
-      else {
+        numberArray.push(numberSelect)
+        countUserNumbers += numberSelect;
+      } else {
         alert('Digite numeros valido');
       }
-    }
-  alert(`A soma dos numeros ${numberArry} é : ${countUserNumbers}`);
+  } 
 } while (userQuestionNumber !== 2);
+  
+alert(`A soma dos numeros ${numberArray} é : ${countUserNumbers}`);

@@ -6,5 +6,5 @@ let userQuestion;
 
 while (userQuestion !== 2) {
   userQuestion = parseInt(prompt('Escolha uma das opções:\n 1 - Continuar perguntando\n 2 - Parar de perguntar'));
-  userQuestion > 2 ? alert('Opção inválida, digite novamente') : null;
+  userQuestion < 1 || userQuestion > 2 ? alert('Opção inválida, digite novamente') : null;
 }

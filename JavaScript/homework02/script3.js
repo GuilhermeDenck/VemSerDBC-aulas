@@ -3,10 +3,9 @@
 
 let numbers = [1, 2, 7, 10, 18];
 let adder = 0;
-let result;
 
 for (let i = 0; i < numbers.length; i++) {
-  result = adder += numbers[i];    
+  adder += numbers[i];    
 }
 
-console.log(result);
+console.log(adder);

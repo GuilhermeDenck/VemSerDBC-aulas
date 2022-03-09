@@ -9,13 +9,13 @@
 // 	59
 // 	60 (aqui é para parar de imprimir)
 
-let time = 0;
+let time = 55;
 
 const cronometro = setInterval(() => {
-  if(time < 60) {
-    time++;
-    time < 10 ? console.log(`0${time}`) : console.log(time);
-  } else {
+  time < 10 ? console.log(`0${time}`) : console.log(time);
+  time++;
+  if(time > 60){
     clearInterval(cronometro);
   }
 }, 1000)
+

@@ -9,6 +9,13 @@ let numberArray = [];
 
 do {
   userQuestionNumber = parseInt(prompt('1 - Inserir número\n2 - Finalizar'))
+
+  let isString = isNaN(userQuestionNumber);
+
+  if(isString) {
+    alert('Digite um número válido');
+  }
+
   if(userQuestionNumber === 1) {
     let numberSelect = parseInt(prompt('Digite um numero: '));    
       if (!isNaN(numberSelect)) {

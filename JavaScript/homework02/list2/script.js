@@ -19,9 +19,16 @@ for(let year = 2016; year <= currentYear; year++){
       console.log(`O salário do funcionário em ${year} foi até R$ ${newSalary.toFixed(2)}`);
     }
 
-
     if(year >= 2018){
       newSalary = salary += (salary * (salaryIncrease = salaryIncrease * 2));
       console.log(`O salário do funcionário em ${year} foi até R$ ${newSalary.toFixed(2)}`);
     }
+}
+
+
+//Melhorando o exercício anterior:
+for(let year = 2016; year <= currentYear; year++){
+  let increaseRate = ((year < 2018) ? salaryIncrease : (salaryIncrease = salaryIncrease * 2));
+  newSalary = salary += (salary * increaseRate);
+  console.log(`O salário do funcionário em ${year} foi até R$ ${newSalary.toFixed (2)}`);
 }

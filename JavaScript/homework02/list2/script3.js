@@ -1,9 +1,14 @@
 // 3) Faça um programa onde o usuário possa escolher qual a tabuada que se deseja ver. Exiba (console) a tabuada desse número de 1 a 10;
 
-let tabuada = 5;
+let numberSelected = prompt('Digite o número que deseja ver a tabuada: ');
 let result = 0;
 
-for(let i = 0; i <= 10; i++) {
-  result = tabuada * i;
-  console.log(`${tabuada} x ${i} = ${result}`);
+if(isNaN(numberSelected)){
+  alert('Digite um número válido');
+  numberSelected = prompt('Digite o número que deseja ver a tabuada: ');
+} else {
+  for(let i = 0; i <= 10; i++) {
+    result = parseInt(numberSelected) * i;
+    console.log(`${parseInt(numberSelected)} x ${i} = ${result}`);
+  }
 }

@@ -4,10 +4,26 @@
 // Exemplo: minhaFuncao( [1, 3, 5] ) neste caso, imprime somente o: 3
 
 function pegaSegundoMaiorEMenor(array) {
-  let segundoMenor = array[1];
-  let segundoMaior = array[array.length - 2];
+  let aux = [];
+  for (let i = 0; i < array.length; i++) {
+    for (let x = 0; x < array.length; x++) {
+      if (array[i] < array[x]) {
+        aux = array[i];
+        array[i] = array[x];
+        array[x] = aux;
+      }
+    }
+  }
 
-  return `${segundoMenor} e ${segundoMaior}`
+  let arrayOrdenado =  array;
+  let segundoMenor = arrayOrdenado[1];
+  let segundoMaior = arrayOrdenado[arrayOrdenado.length - 2];
+
+  if(segundoMenor === segundoMaior) {
+    return `${segundoMenor}`
+  } else {
+    return `${segundoMenor} e ${segundoMaior}`
+  }  
 }
 
-console.log(pegaSegundoMaiorEMenor([1, 3, 5, 7, 9]));
+console.log(pegaSegundoMaiorEMenor( [1, 3, 5, 7, 9] ));

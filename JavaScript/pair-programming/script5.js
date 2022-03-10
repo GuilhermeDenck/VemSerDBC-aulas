@@ -3,7 +3,7 @@
 //   => possiveis combinações da string "tri":  
 //   't', 'tr', 'ti', 'tri', 'tir', 'r', 'rt', 'ri', 'rit', 'rti', 'i', 'ir', 'it', 'irt', 'itr'
 
-function imprimirCombinacoes(string) {
+const imprimirCombinacoes = string => {
   let possibilidades = [];
   for(let i = 0; i < string.length; i++) {
     let letra = string[i];

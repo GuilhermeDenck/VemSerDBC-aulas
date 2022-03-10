@@ -14,7 +14,7 @@ console.log(randomNumber());
 function addRandomNumbers() {
   let list = [];
   while(list.length < 10) {
-    let randomNumbers = Math.round(Math.random() * 100);
+    let randomNumbers = randomNumber();
     if (randomNumbers % 2 !== 0 && randomNumbers >= 14 && randomNumbers <= 50 || randomNumbers % 12 === 0) {
       list.push(randomNumbers);
     }

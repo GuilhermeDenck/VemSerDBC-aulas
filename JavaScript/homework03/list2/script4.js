@@ -1,12 +1,14 @@
 // 4a) Tendo uma lista vazia [], crie uma função que recebe um elemento 
 // 	 qualquer como parâmetro e que adiciona esse elemento à lista;
 
-function addElement(element) {
-  let list = [element];
-  return list;
+let list1 = []
+
+function addElement(array,element) {
+  array.push(element);
+  return array;
 }
 
-console.log(addElement('test'));
+console.log(addElement(list1, 'test3'));
 
 // 4b) Crie duas funções, uma para remover o último elemento da lista e outra para remover o primeiro elemento da lista;
 

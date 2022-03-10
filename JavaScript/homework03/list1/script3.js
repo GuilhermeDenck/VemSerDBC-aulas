@@ -2,16 +2,16 @@
 //    chamada caso algum dos números informados seja inválido.
 //    Esta função de Callback exibe somente a msg no console 'Algum número digitado foi inválido';
 
-function validateNumber(number1, number2) {
-  return typeof number1 != 'number' || typeof number2 != 'number' ; //botei tyupeof por se for um numero dentro de uma string ele n reconhece
+function validateNumber() {
+  return 'Algum número digitado foi inválido';
 }
 
-function sum(number1, number2) {
-  if(!validateNumber(number1, number2)) {
-    return number1 + number2
+function sum(number1, number2, callback) {
+  if(typeof number1 != 'number' || typeof number2 != 'number') {
+    return callback;
   } else {
-    return 'Algum número digitado foi inválido';
+    return number1 + number2;
   }
 }
 
-console.log(sum(2, 2));
+console.log(sum(1, 2, validateNumber() ));

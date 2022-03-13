@@ -20,24 +20,26 @@ const registerProduct = () => {
 
     let validateNumbers = isNaN(id) || isNaN(price);
     let validateText = description.length < 1 || description == ' ';
-    let findProduct = listProducts.find(product => id == product.id);
 
     if(validateNumbers || validateText) {
       alert('Por favor, digite os dados corretamente.');
-    } else if (findProduct) {
-      alert('Este id já está sendo usado, por favor, utilize outro.');
     } else {
       questionsAnswer = false;
     }
   }
-
   const Product = {
     id: id,
     description: description,
     price: price
   }
-  
-  return listProducts.push(Product);
+
+  let confirmUser = confirm(`Deseja cadastrar o produto '${Product.description}' com o preço de R$ ${Product.price}?`);
+  if(confirmUser) {
+    alert(`Produto cadastrado com sucesso!\nId: ${id}\nDescrição: ${description}\nPreço: R$ ${price}`);
+    return listProducts.push(Product);
+  } else {
+    alert('Cadastro cancelado!');
+  }
 }
 
 const findProductById = () => {
@@ -59,16 +61,17 @@ const findProductById = () => {
     }
   }
 
-  return alert(`Id do seu produto - ${findProduct.id}\nDescrição ${findProduct.description}\nPreço ${findProduct.price}`);
+  return alert(`Id do seu produto - ${findProduct.id}\nDescrição - '${findProduct.description}'\nPreço R$ ${findProduct.price}`);
 }
 
 const removeProductById = () => {
   let id;
 
+  let findProduct;
   let questionsAnswer = true;
   while(questionsAnswer) {
     id = parseInt(prompt('Digite o Id do produto que deseja remover: '));
-    let findProduct = listProducts.find(product => id == product.id);
+    findProduct = listProducts.find(product => id == product.id);
 
     let validateNumbers = isNaN(id);
     if(validateNumbers) {
@@ -82,13 +85,23 @@ const removeProductById = () => {
 
   let newArray = listProducts.filter( product => id != product.id);
 
-  return listProducts = newArray;
+  let confirmUser = confirm(`Deseja remover o produto '${findProduct.description}' com o preço de R$ ${findProduct.price}?`);
+  if(confirmUser) {
+    alert(`Produto removido com sucesso!\nId: ${id}\nDescrição: ${findProduct.description}\nPreço: R$ ${findProduct.price}`);
+    return listProducts = newArray;
+  } else {
+    alert('Remoção cancelada!');
+  }
 }
 
 const sumEquity = () => {
-  let sum = 0;
-  listProducts.forEach(product => {
-    sum += product.price;
+
+  let arrayProducts = listProducts.map( product => {
+    return product.price;
+  });
+
+  let sum = arrayProducts.reduce((beforeValue, afterValue) => {
+    return beforeValue + afterValue;
   });
 
   return alert(`A soma dos produtos é ${sum.toFixed(2)}`);
@@ -147,6 +160,7 @@ const menu = () => {
         break;
     }
   } while (option != 7);
+  alert('Obrigado por utilizar nosso sistema!');
 }
 
 alert('Bem-vindo ao Sistema!!')

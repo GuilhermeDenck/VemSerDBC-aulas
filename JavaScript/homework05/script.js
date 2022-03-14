@@ -16,10 +16,12 @@ const registerProduct = () => {
   let questionsAnswer = true;
   while (questionsAnswer) {
     description = prompt('Digite a descrição do produto: ');
-    price = parseFloat(prompt('Digite o preço do produto: '));
+    price = prompt('Digite o preço do produto: ');
+    formatPrice = price.replace(',', '.');
+    formatPrice = parseFloat(formatPrice);
 
-    let validateNumbers = isNaN(id) || isNaN(price);
-    let validateText = description.length < 1 || description == ' ';
+    let validateNumbers = isNaN(formatPrice);
+    let validateText = description.length <= 3 || description == ' ';
 
     if(validateNumbers || validateText) {
       alert('Por favor, digite os dados corretamente.');
@@ -30,12 +32,12 @@ const registerProduct = () => {
   const Product = {
     id: id,
     description: description,
-    price: price
+    price: formatPrice
   }
 
-  let confirmUser = confirm(`Deseja cadastrar o produto '${Product.description}' com o preço de R$ ${Product.price}?`);
+  let confirmUser = confirm(`Deseja cadastrar mesmo este produto? \nDescrição - '${Product.description}' \nPreço - R$ ${Product.price.toString().replace('.', ',')}?`);
   if(confirmUser) {
-    alert(`Produto cadastrado com sucesso!\nId: ${id}\nDescrição: ${description}\nPreço: R$ ${price}`);
+    alert(`Produto cadastrado com sucesso!\nId - ${id}\nDescrição - ${description}\nPreço - R$ ${price.toString().replace('.', ',')}`);
     return listProducts.push(Product);
   } else {
     alert('Cadastro cancelado!');
@@ -61,7 +63,7 @@ const findProductById = () => {
     }
   }
 
-  return alert(`Id do seu produto - ${findProduct.id}\nDescrição - '${findProduct.description}'\nPreço R$ ${findProduct.price}`);
+  return alert(`Id do seu produto - ${findProduct.id}\nDescrição - '${findProduct.description}'\nPreço R$ ${findProduct.price.toString().replace('.', ',')}`);
 }
 
 const removeProductById = () => {
@@ -85,9 +87,9 @@ const removeProductById = () => {
 
   let newArray = listProducts.filter( product => id != product.id);
 
-  let confirmUser = confirm(`Deseja remover o produto '${findProduct.description}' com o preço de R$ ${findProduct.price}?`);
+  let confirmUser = confirm(`Deseja mesmo remover este produto? \nDescrição - '${findProduct.description}'\nPreço - R$ ${findProduct.price.toString().replace('.', ',')}?`);
   if(confirmUser) {
-    alert(`Produto removido com sucesso!\nId: ${id}\nDescrição: ${findProduct.description}\nPreço: R$ ${findProduct.price}`);
+    alert(`Produto removido com sucesso!\nId - ${id}\nDescrição - ${findProduct.description}\nPreço - R$ ${findProduct.price.toString().replace('.', ',')}`);
     return listProducts = newArray;
   } else {
     alert('Remoção cancelada!');

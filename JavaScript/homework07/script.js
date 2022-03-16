@@ -18,8 +18,7 @@ const addTask = () => {
   p.appendChild(texto);
   
   removeTask(li);
-  changeColor(divToDo);
-
+  
   if(!inputToDo.value || inputToDo.value < 3) {
     alert('Por favor, preencha o campo');
   } else {
@@ -35,12 +34,13 @@ const addTask = () => {
     if(listToDo.length > 0) {
       noToDo.style.display = 'none';
     }
-
+    
     li.appendChild(p)
     li.setAttribute('class', 'task-text');
     li.setAttribute('task_id', id);
     id++
     inputToDo.value = '';
+    changeColor(divToDo, li);
   }
 }
 
@@ -65,15 +65,14 @@ const removeTask = (li) => {
   })
 }
 
-const changeColor = (div) => {
-  div.innerText += '  ';
+const changeColor = (div, pai) => {
   let buttonChange = document.createElement('button');
   let icon = document.createElement('i');
 
   buttonChange.appendChild(icon);
   buttonChange.setAttribute('class', 'btn-change');
   icon.setAttribute('class', 'fa-solid fa-check');
-  div.appendChild(buttonChange);
+  pai.appendChild(buttonChange);
 
   buttonChange.addEventListener('click', () => { 
     div.classList.remove('class', 'task-to-do');

@@ -25,15 +25,19 @@ const validarNome = (event) => {
   let caracteresNome = nome.split(' ').join('');
   let finalName = [...caracteresNome];
 
-  let valido = finalName.every( c => c.toUpperCase() !== c.toLowerCase() && isNaN(c));
+  const notNumber = finalName.every( c => isNaN(c));
+  const semCaracterEspecial = finalName.every(c => c.toUpperCase() !== c.toLowerCase());
+  const semEspaço = finalName.some( c => c !== ' ');
 
-  if(!valido) {
+  const isValidString = notNumber && semCaracterEspecial && semEspaço;
+  
+  if(!isValidString) {
     error.classList.remove('d-none');
     error.classList.add('text-danger');
   } else {
     error.classList.add('d-none');
   }
-  return valido;
+  return isValidString;
 }
 
 const validarEmail = (event) => {

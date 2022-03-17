@@ -235,4 +235,17 @@ const validarCadastro = (event) => {
 
 const showColab = (event) => {
   event.preventDefault();
+  let array = [...document.getElementById('t-body').children].map(element => element.innerText)
+
+  let mappedArray = array.map(element => {
+    let splitted = element.split('\t')
+    
+    return {
+      Nome: splitted[0],
+      Nascimento: splitted[1],
+      Email: splitted[2]
+    }
+  })
+
+  console.table(mappedArray)
 }

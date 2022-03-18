@@ -203,6 +203,13 @@ const listarUsuarios = () => {
   });
 }
 
+const limparCampos = () => {
+  document.getElementById('nome-input').value = '';
+  document.getElementById('date-input-registration').value = '';
+  document.getElementById('email-input-registration').value = '';
+  document.getElementById('password-input-registration').value = '';
+}
+
 const validarCadastro = (event) => {
   event.preventDefault();
   let cadastroValido = validarData() && validarEmail() && validarSenha();
@@ -210,6 +217,8 @@ const validarCadastro = (event) => {
 
   if(cadastroValido) {
     cadastrarUsuario(event);
+  } else {
+    limparCampos();
   }
 }
 

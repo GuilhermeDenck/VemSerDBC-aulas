@@ -1,0 +1,11 @@
+.containerForm {
+  height: 800px;
+}
+
+.formContact {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  border-radius: 5px;
+  padding-top: 5em;
+}

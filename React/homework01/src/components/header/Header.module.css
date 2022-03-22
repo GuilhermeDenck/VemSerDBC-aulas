@@ -1,0 +1,43 @@
+.navBar {
+  background-color: red;
+}
+
+.navConteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.imgHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  gap: 1em;
+}
+
+.navConteudo > nav > ul {
+  display: flex;
+  list-style-type: none;
+  gap: 1em;
+  justify-content: flex-end;
+}
+
+.navConteudo > nav > ul > li:hover {
+  transition: all 100ms ease-in-out;
+  transform: scale(1.05);
+}
+
+.navConteudo > nav > ul > li {
+  border: 2px solid white;
+  box-shadow: 1px 1px white;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+.navConteudo > nav > ul > li > a {
+  color: white;
+  text-decoration: none;
+}

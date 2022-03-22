@@ -1,0 +1,20 @@
+.containerCogus {
+  display: flex;
+  margin: 0 20px;
+  gap: 20em;
+}
+
+.mapa {
+  width: 100%;
+}
+
+.mapa > h2 {
+  text-align: center;
+  padding-bottom: .5em;
+}
+
+.localizacao {
+  margin: 0 auto;
+  padding: 10px;
+  border: 0;
+}

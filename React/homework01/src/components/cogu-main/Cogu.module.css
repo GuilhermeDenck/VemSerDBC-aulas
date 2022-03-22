@@ -1,0 +1,14 @@
+.cogu-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  box-shadow: 2px 1px 1px darkgray;
+}
+
+.cogu-center:hover {
+  color: red;
+  transition: all 100ms ease-in-out;
+  transform: scale(1.05);
+}

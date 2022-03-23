@@ -1,4 +1,4 @@
-import FrameGoogle from '../iframe/FrameGoogle.component';
+import FrameGoogle from '../../components/iframe/FrameGoogle.component';
 import styles from './About.module.css'
 
 const About = () => {

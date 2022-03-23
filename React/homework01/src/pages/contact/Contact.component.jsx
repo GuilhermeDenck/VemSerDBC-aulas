@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Input from '../input/Input.component'
+import Input from '../../components/input/Input.component'
 import styles from './Contact.module.css';
 
 const Contact = () => {

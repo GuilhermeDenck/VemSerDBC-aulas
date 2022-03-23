@@ -1,5 +1,5 @@
-import Cogu from '../cogu-main/Cogu.component';
-import FrameGoogle from '../iframe/FrameGoogle.component';
+import Cogu from '../../components/cogu-main/Cogu.component';
+import FrameGoogle from '../../components/iframe/FrameGoogle.component';
 import styles from './Home.module.css'
 
 const Home = () => {

@@ -1,8 +1,8 @@
 
 import Header from './components/header/Header.component';
-import Home from './components/home/Home.component';
-import About from './components/about/About.component';
-import Contact from './components/contact/Contact.component';
+import Home from './pages/home/Home.component';
+import About from './pages/about/About.component';
+import Contact from './pages/contact/Contact.component';
 import Footer from './components/footer/Footer.component';
 import './App.css';
 

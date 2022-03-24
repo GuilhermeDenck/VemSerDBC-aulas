@@ -1,0 +1,78 @@
+.terminalLg {
+  width: 865px;
+  height: 500px;
+  opacity: 0.8;
+  filter: drop-shadow(0px 0px 5px #4A4A4A);
+  border-radius: 15px;
+}
+
+.terminalLg, .terminalSm, .btns, .classesText, .blocoCodigo, .blocoCodigo span, .blocoCodigo p, .bloco {
+  background: #151616;
+}
+
+
+.terminalSm {
+  width: 510px;
+  height: 500px;
+  opacity: 0.8;
+  border: 1px solid #4A4A4A;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.btns {
+  display: flex;
+  width: 100px;
+  border-radius: 50%;
+  margin-left: 1px;
+  margin-bottom: 50px;
+}
+
+.btnFechar {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
+
+  background: #FF5F56;
+}
+
+.btnMaximizar {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
+
+  background: #FFBD2E;
+}
+
+.btnMinimizar {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
+
+  background: #27C93F;;
+}
+
+.bloco {
+  display: flex;
+}
+
+.blocoCodigo span {
+  color:  #7000FF;
+  margin-left: 5px;
+}
+
+.propriedade {
+  color: #0EE6B7;
+  margin-left: 20px;
+}
+
+.estilo {
+  color: white;
+  margin-left: 5px;
+}

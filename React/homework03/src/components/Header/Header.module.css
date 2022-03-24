@@ -1,0 +1,38 @@
+.navBar {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 125px;
+  height: 100%;
+  padding-right: 50px;
+}
+
+.navBar nav {
+  padding-left: 50px;
+}
+
+.navBar nav > ul {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+}
+
+.navBar nav > ul > li > a{
+  text-decoration: none;
+  color: white;
+}
+
+.navBar a:hover{
+  color: darkgray;
+}

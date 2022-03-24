@@ -14,7 +14,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Perfil />} />
-            <Route path="/repostiroios" element={<Repo />} />
+            <Route path="/repositorios" element={<Repo />} />
             <Route path="/contato" element={<Contact />} />
           </Routes>
         </div>

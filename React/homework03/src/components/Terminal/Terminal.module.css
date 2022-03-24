@@ -6,17 +6,18 @@
   border-radius: 15px;
 }
 
-.terminalLg, .terminalSm, .btns, .classesText, .blocoCodigo, .blocoCodigo span, .blocoCodigo p, .bloco {
+.terminalLg, .terminalCard, .btns, .classesText, .blocoCodigo, .blocoCodigo span, .blocoCodigo p, .bloco {
   background: #151616;
 }
 
 
-.terminalSm {
-  width: 510px;
-  height: 500px;
+.terminalCard {
+  width: 90%;
+  height: 200px;
   opacity: 0.8;
-  border: 1px solid #4A4A4A;
-  box-sizing: border-box;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  filter: drop-shadow(0px 0px 5px #4A4A4A);
   border-radius: 15px;
 }
 
@@ -25,7 +26,6 @@
   width: 100px;
   border-radius: 50%;
   margin-left: 1px;
-  margin-bottom: 50px;
 }
 
 .btnFechar {
@@ -62,8 +62,13 @@
   display: flex;
 }
 
+.blocoCodigo {
+  padding-top: 50px;
+}
+
 .blocoCodigo span {
   color:  #7000FF;
+  margin-top: 50px;
   margin-left: 5px;
 }
 

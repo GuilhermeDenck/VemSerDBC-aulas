@@ -12,8 +12,8 @@ function App() {
       <Header />
         <div className="container">
           <Home />
-          {/* <About /> */}
-          {/* <Contact /> */}
+          <About />
+          <Contact />
         </div>
       <Footer />
     </>

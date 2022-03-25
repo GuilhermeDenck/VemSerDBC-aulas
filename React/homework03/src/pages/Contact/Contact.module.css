@@ -1,0 +1,14 @@
+.titleForm {
+  text-align: center;
+  color: white;
+  margin: 50px 0;
+  background: #151616;
+}
+
+.formContact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #151616;
+}

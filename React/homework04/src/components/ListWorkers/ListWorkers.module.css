@@ -1,4 +1,57 @@
 .listWorkers {
   display: flex;
   flex-direction: column-reverse;
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  border: 1px solid black;
+  box-shadow: 1px 1px 3px 3px black;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.listWorkers table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.listWorkers td, .listWorkers th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  color: white;
+}
+
+.listWorkers button {
+  background-color: #61dafb;
+  width: 30px;
+  height: 30px;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem;
+  cursor: pointer;
+}
+
+.btnTable {
+  display: flex;
+  justify-content: space-between;
+}
+
+.divList {
+  text-align: start;
+}
+
+.divList span {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.listWorkers p {
+  color: white;
 }

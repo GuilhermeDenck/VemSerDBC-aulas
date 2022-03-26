@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { WorkContext } from '../../context/WorkContext';
+import { AiOutlineClose, AiFillEdit } from 'react-icons/ai';
 
 import style from './ListWorkers.module.css';
 const ListWorkers = () => {
@@ -10,13 +11,25 @@ const ListWorkers = () => {
     <div className={style.listWorkers}>
         { 
           listWorkers.length ? ( listWorkers.map(worker => (
-            <div key={worker.id}>
-              <h2>{worker.name}</h2>
-              <p>{worker.email}</p>
-              <p>{worker.profission}</p>
-              <button onClick={ () => removeWoker(worker.id)}>Remover</button>
-              <button onClick={ () => alterWorker(worker.id ,worker.name, worker.email, worker.profission)}>Alterar</button>
-            </div>
+            <table>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Profissão</th>
+                <th></th>
+
+              </tr>
+
+              <tr>
+                <td>{worker.name}</td>
+                <td>{worker.email}</td>
+                <td>{worker.profission}</td>
+                <td colSpan={2} className={style.btnTable}>
+                  <button onClick={ () => removeWoker(worker.id)}> <AiOutlineClose  /> </button>
+                  <button onClick={ () => alterWorker(worker.id ,worker.name, worker.email, worker.profission)}> <AiFillEdit /> </button>
+                </td>
+              </tr>
+            </table>
           )) ) : (
             <p>Nenhum trabalhador cadastrado</p>
           )

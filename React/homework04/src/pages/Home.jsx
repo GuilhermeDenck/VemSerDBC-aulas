@@ -21,11 +21,9 @@ const Home = () => {
   const validateForm = (e) => {
     e.preventDefault();
 
-    addWorker(e);
-
-    // validateEmail.test(email) && validateName.test(name) && validateProfission.test(profission) 
-    // ? addWorker(e) 
-    // : alert('Preencha todos os campos corretamente', resetForm());
+    validateEmail.test(email) && validateName.test(name) && validateProfission.test(profission) 
+    ? addWorker(e) 
+    : alert('Preencha todos os campos corretamente', resetForm());
   }
 
   return (

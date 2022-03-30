@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import Menu from './Menu.component';
+import style from './Header.module.css';
 
 const Header = () => {
   const { isLogged } = useContext(AuthContext);
@@ -9,9 +10,9 @@ const Header = () => {
     isLogged();
   },[])
   return (
-    <div>
+    <header className={style.header}>
         <Menu />
-    </div>
+    </header>
   )
 }
 

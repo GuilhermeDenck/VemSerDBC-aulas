@@ -45,7 +45,6 @@ const AuthProvider = ({ children }) => {
   },[]);
 
   if(loading) return (<h1>Loading...</h1>);
-  
 
   return (
     <AuthContext.Provider value={{handleLogin, handleLogout, token, isLogged}}>

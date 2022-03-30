@@ -1,9 +1,12 @@
 import Menu from "../Header/Menu.component"
+import style from "./Footer.module.css"
 
 const Footer = () => {
   return (
-    <Menu />
+    <footer className={style.footer}>
+      <Menu />
+    </footer>
   )
 }
 
-export default Footer
+export default Footer;

@@ -1,0 +1,27 @@
+.users {
+  width: 100%;
+  height: 76.8vh;
+}
+
+.users h1 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-top: 100px;
+}
+
+.tablePersons {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.tablePersons td, .tablePersons th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.tablePersons tr:nth-child(even) {
+  background-color: #dddddd;
+}

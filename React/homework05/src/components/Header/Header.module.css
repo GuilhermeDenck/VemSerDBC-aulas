@@ -1,0 +1,48 @@
+.header {
+  width: 100%;
+  background-color: #1D1E20;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.header a {
+  color: white;
+}
+
+.logo{
+  justify-content: flex-start;
+  margin-left: 20px;
+  font-size: 24px;
+}
+
+.navBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.navBarLi {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20px;
+}
+
+.navBarLi a:hover {
+  text-decoration: underline;
+}
+
+.btnLogout {
+  background-color: #dc3546;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

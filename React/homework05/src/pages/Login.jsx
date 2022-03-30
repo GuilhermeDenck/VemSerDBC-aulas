@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
 
-  const { handleLogin, handleLogout, token, login } = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext);
 
   return (
     <div>

@@ -17,7 +17,7 @@
 }
 
 .form {
-  margin: 30px 0;
+  margin: 25px 0;
 }
 
 .form div {
@@ -39,4 +39,20 @@
   border-radius: 4px;
   color: white;
   background: #151616;
+}
+
+.form button[type='submit'] {
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: white;
+  background: #151616;
+}
+
+.form button[type='submit']:hover {
+  background: #2e2f2f;
+  cursor: pointer;
 }

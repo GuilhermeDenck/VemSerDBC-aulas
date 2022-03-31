@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react'
 import { Formik, Field, Form } from 'formik';
 import axios from 'axios';
 
@@ -17,7 +16,7 @@ function Adress() {
         setFieldValue('bairro', data.bairro);
         setFieldValue('cidade', data.localidade);
         setFieldValue('estado', data.uf);
-        setFieldValue('ddd', data.ddd);
+        setFieldValue('tel', data.ddd);
         return data;
       } catch (error) {
         alert('CEP não encontrado');
@@ -43,7 +42,7 @@ function Adress() {
   }
 
   const maskTel = (e, setFieldValue ) => {
-    setFieldValue('tel', e.target.value.replace(regexOnlyNumbers, '').replace(/(\d{5})(\d)/, '$1-$2'));
+    setFieldValue('tel', e.target.value.replace(regexOnlyNumbers, '').replace(/(\d{2})(\d)/, "($1) $2").replace(/(\d{5})(\d{4})(\d)/, "$1-$2"));
   }
 
   return (
@@ -58,8 +57,10 @@ function Adress() {
             bairro: '',
             cidade: '',
             estado: '',
-            ddd: '',
             tel: ''
+          }}
+          onSubmit={() => {
+            alert('Cadastrado com sucesso');
           }}
           render={({ setFieldValue }) => (
             <Form className={style.form}>
@@ -88,14 +89,11 @@ function Adress() {
                 <Field id="estado" name="estado" placeholder="digite seu Estado" />
               </div>
               <div>
-                <label htmlFor="ddd">DDD</label>
-                <Field id="ddd" name="ddd" placeholder="digite seu DDD" />
-              </div>
-              <div>
                 <label htmlFor="tel">Telefone</label>
-                <Field id="tel" name="tel" placeholder="digite sua Telefone" maxLength="10" onChange={ e => maskTel(e, setFieldValue)} />
+                <Field id="tel" name="tel" placeholder="digite sua Telefone" maxLength="15" onChange={ e => maskTel(e, setFieldValue)} />
               </div>
-          </Form>
+              <button type="submit">Cadastrar</button>
+            </Form>
           )}
         />
       </div>

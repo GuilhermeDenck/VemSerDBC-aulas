@@ -1,37 +1,61 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../context/AuthContext';
-import moment from 'moment';
+import { UserContext } from "../../context/UserContext";
 import api from "../../services/api";
+import moment from 'moment';
 
 import Loading from "../../components/Loading/Loading.component";
 import Error from "../../components/Error/Error.component";
 
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
+
+import { ToastContainer ,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import style from './Users.module.css';
 const Users = () => {
 
-  const { isLogged } = useContext(AuthContext);
-  const [persons, setPersons] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-  
-  const getPersons = async () => {
-    try {
-      const {data} = await api.get('/pessoa');
-      setPersons(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setError(true);
-      setLoading(false);
-    }
-  }
+  const navigate = useNavigate();
 
-  const formatCpf = (cpf) => cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  const { isLogged } = useContext(AuthContext);
+  const { getPersons, loading, persons, error} = useContext(UserContext);
+  
+  const maskCpf = (cpf) => cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 
   useEffect( () => {
     isLogged();
     getPersons();
   }, []);
+
+  const notify = () => toast("Usuário Deletado com sucesso!");
+  const notifyError = () => toast("Erro ao deletar usuário!");
+
+  const handleDelete = (idPessoa) => {
+    confirmAlert({
+      title: 'Confirme',
+      message: 'Tem certeza que deseja excluir?',
+      buttons: [
+        {
+          label: 'Sim',
+          onClick: async () => {
+            try {
+              const response = await api.delete(`/pessoa/${idPessoa}`);
+              console.log(response);
+              notify();
+            } catch (error) {
+              console.log(error);
+              notifyError();
+            }
+          }
+        },
+        {
+          label: 'Não',
+        }
+      ]
+    });
+  }
 
   if(loading) return <Loading />;
 
@@ -40,28 +64,20 @@ const Users = () => {
   return (
     <div className={style.users}>
       <h1>Users</h1>
+      <Link to="/create-user"> Cadastrar Usuário </Link>
       <div>
       {
-        persons.length ? (
-          <table className={style.tablePersons}>
-            <tr>
-              <th>Nome</th>
-              <th>CPF</th>
-              <th>E-mail</th>
-              <th>Data de Nascimento</th>
-            </tr>
-            {
-              persons.map(person => (
-                <tr key={person.id}>
-                  <td>{person.nome}</td>
-                  <td>{formatCpf(person.cpf)}</td>
-                  <td>{person.email}</td>
-                  <td>{moment(person.dataNascimento).format('DD/MM/YYYY')}</td>
-                </tr>
-              ))
-            }
-          </table>
-        ) : (
+        persons.length ? persons.map(person => (
+          <div key={person.idPessoa}>
+            <h2> {person.nome} </h2>
+            <p> {moment(person.dataNascimento).format('DD/MM/YYYY')} </p>
+            <p> {maskCpf(person.cpf)} </p>
+            <p> {person.email} </p>
+            <button onClick={ () => handleDelete(person.idPessoa)}> Deletar</button>
+            <button onClick={ () => navigate(`/create-user/${person.idPessoa}`)}> Atualizar </button>
+            <ToastContainer />
+          </div>
+        )) : (
           <h3> Sem pessoas para exibir </h3>
         )   
       }

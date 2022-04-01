@@ -5,5 +5,74 @@
 .users h1 {
   text-align: center;
   font-size: 2.5em;
-  margin-top: 100px;
+  margin-top: 50px;
 }
+
+.btnCreate {
+  width: 150px;
+  height: 40px;
+  margin-left: 20px;
+
+  background-color: #61dafb;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem;
+  cursor: pointer;
+}
+
+.btnCreate:hover {
+  background: #4398af;
+  cursor: pointer;
+}
+
+.gridUsers {
+  display: grid;
+  margin: 0 20px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px;
+  margin-bottom: 30px;
+}
+
+.boxUser {
+  display: flex;
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px black;
+  border-radius: 5px;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.boxUser span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.boxUser p {
+  margin: 0;
+  padding: 10px;
+  font-size: 1.2em;
+}
+
+.boxUser > .btns {
+  padding: 10px;
+}
+
+.btnAtt {
+  background-color: #ffc107;
+}
+
+.del {
+  background-color: #dc3546;
+}
+
+.btns button {
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem;
+  cursor: pointer;
+  margin-right: 10px;
+}
+

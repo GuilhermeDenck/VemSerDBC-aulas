@@ -49,10 +49,10 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   color: white;
-  background: #151616;
+  background: #61dafb;
 }
 
 .form button[type='submit']:hover {
-  background: #2e2f2f;
+  background: #4398af;
   cursor: pointer;
 }

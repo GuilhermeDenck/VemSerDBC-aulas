@@ -1,17 +1,16 @@
 import { useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../context/AuthContext';
 import { UserContext } from "../../context/UserContext";
+import { confirmAlert } from 'react-confirm-alert';
+import { ToastContainer ,toast } from 'react-toastify';
 import api from "../../services/api";
 import moment from 'moment';
 
 import Loading from "../../components/Loading/Loading.component";
 import Error from "../../components/Error/Error.component";
 
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
-
-import { ToastContainer ,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import style from './Users.module.css';
@@ -29,8 +28,21 @@ const Users = () => {
     getPersons();
   }, []);
 
-  const notify = () => toast("Usuário Deletado com sucesso!");
-  const notifyError = () => toast("Erro ao deletar usuário!");
+  const notifySucess = () => {
+    toast.success("Usuário Deletado com sucesso!", {
+      position: toast.POSITION.TOP_CENTER
+    });
+  } 
+
+  const notifyError = () => {
+    toast.error("Erro ao deletar usuário!", {
+      position: toast.POSITION.TOP_CENTER
+    });
+  } 
+
+  const handleCreateUser = () => {
+    navigate("/create-user");
+  }
 
   const handleDelete = (idPessoa) => {
     confirmAlert({
@@ -43,7 +55,7 @@ const Users = () => {
             try {
               const response = await api.delete(`/pessoa/${idPessoa}`);
               console.log(response);
-              notify();
+              notifySucess();
             } catch (error) {
               console.log(error);
               notifyError();
@@ -64,17 +76,19 @@ const Users = () => {
   return (
     <div className={style.users}>
       <h1>Users</h1>
-      <Link to="/create-user"> Cadastrar Usuário </Link>
-      <div>
+      <button onClick={handleCreateUser} className={style.btnCreate}> Cadastrar Usuário </button>
+      <div className={style.gridUsers}>
       {
         persons.length ? persons.map(person => (
-          <div key={person.idPessoa}>
-            <h2> {person.nome} </h2>
-            <p> {moment(person.dataNascimento).format('DD/MM/YYYY')} </p>
-            <p> {maskCpf(person.cpf)} </p>
-            <p> {person.email} </p>
-            <button onClick={ () => handleDelete(person.idPessoa)}> Deletar</button>
-            <button onClick={ () => navigate(`/create-user/${person.idPessoa}`)}> Atualizar </button>
+          <div key={person.idPessoa} className={style.boxUser}>
+            <p> <span> Nome: </span>  {person.nome} </p>
+            <p> <span> data de nascimento: </span>  {moment(person.dataNascimento).format('DD/MM/YYYY')} </p>
+            <p> <span> CPF: </span> {maskCpf(person.cpf)} </p>
+            <p> <span> E-mail: </span>  {person.email} </p>
+            <div className={style.btns}>
+              <button className={style.btnAtt} onClick={ () => navigate(`/create-user/${person.idPessoa}`)}> Atualizar </button>
+              <button className={style.del} onClick={ () => handleDelete(person.idPessoa)}> Deletar</button>
+            </div>
             <ToastContainer />
           </div>
         )) : (

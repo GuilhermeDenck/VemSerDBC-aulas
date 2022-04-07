@@ -28,7 +28,7 @@ export const UlNav = styled.ul`
   }
 
   button {
-    width: 220px;
+    width: 240px;
     height: 50px;
     background: #3751FF;
     color: white;

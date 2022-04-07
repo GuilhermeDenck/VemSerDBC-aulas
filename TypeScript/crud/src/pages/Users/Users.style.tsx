@@ -33,7 +33,7 @@ export const ListPersons = styled.div`
 
 export const ContainerList = styled.div`
   display: flex;
-  width: 90%;
+  width: 93%;
   margin-left: 30px;
   margin-bottom: 30px;
   flex-direction: column;

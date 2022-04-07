@@ -4,8 +4,8 @@ import {
   CardTitle
 } from "./Home.styles";
 
-const Home = () => {
 
+const Home = () => {
 
   return (
     <Container>

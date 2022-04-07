@@ -1,11 +1,10 @@
 import moment from "moment";
-import { FC } from "react";
 import { PersonDTO } from "../../model/PersonDTO";
 import { ListPersons } from './Users.style'
 
 const List = ({ persons }:PersonDTO) => {
 
-  const maskCPF: FC<any> = cpf => {
+  const maskCPF = (cpf: string) => {
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
   }
 

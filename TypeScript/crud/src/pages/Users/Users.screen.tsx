@@ -21,10 +21,10 @@ const Users = () => {
       <TitlePage> Persons </TitlePage>
       <ContainerList>
         <TablePersons>
-          <td>Nome</td>
-          <td>Aniverásario</td>
-          <td>Cpf</td>
-          <td>E-mail</td>
+          <span>Nome</span>
+          <span>Aniverásario</span>
+          <span>Cpf</span>
+          <span>E-mail</span>
         </TablePersons>
         <List persons={persons}/>
       </ContainerList>

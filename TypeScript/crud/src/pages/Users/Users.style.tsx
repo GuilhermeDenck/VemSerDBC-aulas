@@ -15,12 +15,12 @@ export const TitlePage = styled.h1`
   text-align: start;
 `;
 
-export const TablePersons = styled.table`
+export const TablePersons = styled.div`
   display: grid;
   grid-template-columns: 40% repeat(3, 20%);
-  opacity: 0.5;
-
-  td {
+  
+  span {
+    opacity: 0.5;
     margin-bottom: 5px;
   }
 `;

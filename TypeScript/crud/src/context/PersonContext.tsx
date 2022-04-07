@@ -1,10 +1,10 @@
-import { FC, createContext, useState, useEffect } from 'react';
+import { FC, createContext, useState, useEffect, ReactNode } from 'react';
 import { PersonDTO } from '../model/PersonDTO';
 import api from '../service/api'
 
 export const PersonContext = createContext({});
 
-const PersonProvider: FC<any> = ({ children }) => {
+const PersonProvider: FC<ReactNode> = ({ children }) => {
 
   const [persons, setPersons] = useState<PersonDTO['persons']>([]);
   const [loading, setLoading] = useState(true);

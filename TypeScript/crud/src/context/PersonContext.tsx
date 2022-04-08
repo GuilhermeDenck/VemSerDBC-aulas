@@ -22,6 +22,17 @@ const PersonProvider: FC<ReactNode> = ({ children }) => {
     }
   }
 
+  const deletePerson = async (id: number) => {
+    console.log(id);
+    try {
+      const { data } = await api.delete(`/pessoa/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+
+    getPersons();
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if(token) {
@@ -30,7 +41,7 @@ const PersonProvider: FC<ReactNode> = ({ children }) => {
   },[])
 
   return (
-    <PersonContext.Provider value={{getPersons, persons}}>
+    <PersonContext.Provider value={{getPersons, deletePerson, persons}}>
       {children}
     </PersonContext.Provider>
   )

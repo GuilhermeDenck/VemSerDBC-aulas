@@ -10,3 +10,10 @@ export interface PersonDTO {
     nome: string
   }[]
 }
+
+export interface UserDTO {
+  cpf: string;
+  dataNascimento: string;
+  email: string;
+  nome: string;
+}

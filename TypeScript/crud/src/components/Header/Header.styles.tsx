@@ -47,3 +47,7 @@ export const UlNav = styled.ul`
     background: #2538b1;
   }
 `;
+
+export const LogoA = styled.a`
+  cursor: pointer;
+`;

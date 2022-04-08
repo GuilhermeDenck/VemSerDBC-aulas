@@ -3,7 +3,8 @@ import { PersonContext } from "../../context/PersonContext";
 import api from '../../service/api'
 
 import List from './List'
-import { ContainerPage, TitlePage, TablePersons, ContainerList } from './Users.style';
+import { TitlePage } from '../../global.style'
+import { ContainerPage, TablePersons, ContainerList } from './Users.style';
 const Users = () => {
 
   const { getPersons, persons } = useContext<any>(PersonContext);

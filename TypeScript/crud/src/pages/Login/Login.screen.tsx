@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import {Formik, Field, Form, FormikHelpers} from 'formik';
 import { LoginDTO } from '../../model/LoginDTO';
-import { ContainerLogin, TitleForm, DivForm, DivInput, LabelLogin, InputLogin, ButtonLogin, DivSignUp } from './Login.styles';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import VemSerColorido from '../../images/VemSerColorido.png'
 import eye from '../../images/active.svg'
 
+import { LabelForm } from '../../global.style'
+import { ContainerLogin, TitleForm, DivForm, DivInput, InputLogin, ButtonLogin, DivSignUp } from './Login.styles';
 const Login = () => {
 
   const navigate = useNavigate();
@@ -44,15 +45,15 @@ const Login = () => {
             <p>Digite seu usuário e senha abaixo</p>
             <Form>
               <DivInput>
-                <LabelLogin htmlFor="usuario"> Usuário </LabelLogin>
+                <LabelForm htmlFor="usuario"> Usuário </LabelForm>
                 <Field name="usuario" as={InputLogin} id="usuario" placeholder="Digite o nome do usuário"/>
               </DivInput>
             
               <DivInput>
-                <LabelLogin htmlFor="senha"> Senha </LabelLogin>
+                <LabelForm htmlFor="senha"> Senha </LabelForm>
                 <div>
                   <Field name="senha" as={InputLogin} id="senha" type={ typeInput ? 'password' : 'text'  } placeholder="Digite a sua senha"/>
-                  <a onClick={ () =>  setTypeInput(!typeInput) }> <img src={eye} alt="olho" width={30} height={30} /> </a>
+                  <a type='a' onClick={ () =>  setTypeInput(!typeInput) }> <img src={eye} alt="olho" width={30} height={30} /> </a>
                 </div>
               </DivInput>
 

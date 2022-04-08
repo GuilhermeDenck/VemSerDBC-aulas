@@ -47,18 +47,12 @@ export const DivInput = styled.div`
   position: relative;
 
   img {
-    position: fixed;
-    left: 58%;
-    top: 59%;
+    position: absolute;
+    left: 90%;
+    top: 45%;
     z-index: 1;
     cursor: pointer;
   }
-`;
-
-export const LabelLogin = styled.label`
-  color: #9FA2B4;
-  font-family: 'Mulish';
-  font-size: 17px;
 `;
 
 export const InputLogin = styled.input`

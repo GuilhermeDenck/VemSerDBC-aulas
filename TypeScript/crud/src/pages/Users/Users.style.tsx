@@ -8,13 +8,6 @@ export const ContainerPage = styled.div`
   min-width: 85%;
 `;
 
-export const TitlePage = styled.h1`
-  font-size: 20px;
-  margin-top: 60px;
-  margin-left: 30px;
-  text-align: start;
-`;
-
 export const TablePersons = styled.div`
   display: grid;
   grid-template-columns: 40% repeat(3, 20%);

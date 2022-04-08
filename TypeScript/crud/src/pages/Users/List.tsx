@@ -22,7 +22,6 @@ const List = ({ persons }:PersonDTO) => {
       }
     </>
   )
-
 }
 
 export default List;

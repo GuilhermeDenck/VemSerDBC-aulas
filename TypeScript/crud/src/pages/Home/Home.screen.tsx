@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { AddressContext } from '../../context/AddressContext';
 import { PersonContext } from "../../context/PersonContext";
 
-
+import CountUp from 'react-countup';
 const Home = () => {
 
   const navigate = useNavigate();
@@ -31,11 +31,11 @@ const Home = () => {
     <Container>
       <Card onClick={ () => navigate('/users') }>
         <CardTitle> Total de Pessoas Registradas </CardTitle>
-        <h2> {persons.length} </h2>
+        <h2><CountUp end={persons.length} duration={0.5}/></h2>
       </Card>
       <Card onClick={ () => navigate('/address') } >
         <CardTitle> Total de Endereços Registrados </CardTitle>
-        <h2> {address.length} </h2>
+        <h2><CountUp end={address.length} duration={0.5} /></h2>
       </Card>
     </Container>
   )

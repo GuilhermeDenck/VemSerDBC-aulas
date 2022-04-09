@@ -44,8 +44,6 @@ const AuthProvider: FC<ReactNode> = ({children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if(token) {
-      console.log('entrou no if');
-      
       api.defaults.headers.common['Authorization'] = token;
       setHasToken(true);
     }

@@ -1,7 +1,6 @@
 import ListAddress from './ListAddress';
 import api from '../../service/api';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
+import { useFormik, FormikHelpers } from 'formik';
 import { useEffect, useContext } from 'react';
 
 import { AddressContext } from '../../context/AddressContext';
@@ -9,11 +8,10 @@ import { AddressContext } from '../../context/AddressContext';
 import { TitlePage, LabelForm } from '../../global.style';
 import { ContainerPage, ContainerList, DivInput, InputForm } from '../Users/Users.style';
 import { TableAddress, FormAddress, GridInputsAddress, ButtonRegister, SelectAddress } from './Address.style';
+import { CepDTO } from '../../model/CepDTO';
 const Address = () => {
 
   const { address, getAllAddress, getAddress, sendAddress } = useContext<any>(AddressContext);
-
-  const navigate = useNavigate();
 
   const hasToken = localStorage.getItem("token");
   useEffect( () => {
@@ -35,14 +33,15 @@ const Address = () => {
       numero: '',
       pais: ''
     },
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: (values:CepDTO, { setSubmitting }: FormikHelpers<CepDTO>) => {
+      setSubmitting(false);
+      sendAddress(values);
     },
   });
 
   return (
       <ContainerPage>
-        <FormAddress>
+        <FormAddress onSubmit={formikProps.handleSubmit}>
           <GridInputsAddress>
             <DivInput>
               <LabelForm>CEP</LabelForm>
@@ -88,7 +87,7 @@ const Address = () => {
             </DivInput>
 
           </GridInputsAddress>
-          <ButtonRegister> Registrar Endereço </ButtonRegister>
+          <ButtonRegister type='submit'> Registrar Endereço </ButtonRegister>
         </FormAddress>
         <TitlePage> Address </TitlePage>
         <ContainerList>

@@ -43,7 +43,7 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
     getAllAddress();
   }
 
-  const sendAddress = async (values: CepDTO) => {
+  const sendAddress = async (values: CepDTO) => {    
     try {
       const { cep, logradouro, complemento, localidade, uf, tipo, numero, pais } = values;
 
@@ -59,10 +59,10 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
       }
 
       const { data } = await api.post(`/endereco/${648}`, newAddress);
-      return data;
     } catch (error) {
       console.log(error);
     }
+    getAllAddress();
   }
 
   return (

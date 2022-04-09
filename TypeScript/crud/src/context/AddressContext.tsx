@@ -3,6 +3,7 @@ import { AddressDTO } from '../model/AddressDTO';
 import { CepDTO } from '../model/CepDTO';
 import axios from 'axios';
 import api from '../service/api';
+import Notiflix from "notiflix";
 
 export const AddressContext = createContext({});
 
@@ -33,14 +34,30 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
   }
 
   const deleteAddress = async (id: number) => {
-    console.log(id);
-    try {
-      const { data } = await api.delete(`/endereco/${id}`);
-    } catch (error) {
-      console.log(error);
-    }
-    
-    getAllAddress();
+    Notiflix.Confirm.show(
+      'Alerta de Confirmação',
+      'Tem certeza que deseja apagar este endereço?',
+      'Sim',
+      'Não',
+      async function confirmButton() {
+          try {
+              await api.delete(`/endereco/${id}`)
+              Notiflix.Notify.success('Você excluiu esse endereço!');
+              getAllAddress();
+          } catch (error) {
+              Notiflix.Notify.failure('Ocorreu um erro ao excluir este endereço!');
+              console.log(error)
+          }  
+      },
+      function cancelButton() {
+          Notiflix.Notify.warning('Operação cancelada');
+      },
+      {
+        width: '420px',
+        borderRadius: '10px',
+      },
+    );
+
   }
 
   const sendAddress = async (values: CepDTO) => {    
@@ -48,7 +65,7 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
       const { cep, logradouro, complemento, localidade, uf, tipo, numero, pais } = values;
 
       const newAddress = {
-        cep: cep,
+        cep: cep.replace(/-/g, ''),
         cidade: localidade,
         complemento: complemento,
         estado: uf,
@@ -59,7 +76,9 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
       }
 
       const { data } = await api.post(`/endereco/${648}`, newAddress);
+      Notiflix.Notify.success('Endereço cadastrado com sucesso!');
     } catch (error) {
+      Notiflix.Notify.failure('Ocorreu um erro ao cadastrar este endereço!');
       console.log(error);
     }
     getAllAddress();

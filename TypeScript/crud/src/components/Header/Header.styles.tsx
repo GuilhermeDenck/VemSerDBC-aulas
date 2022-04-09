@@ -34,7 +34,7 @@ export const UlNav = styled.ul`
     color: white;
 
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 10px;
 
     box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
     border-radius: 8px;

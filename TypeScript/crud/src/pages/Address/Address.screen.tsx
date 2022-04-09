@@ -1,11 +1,13 @@
 import ListAddress from './ListAddress';
 import api from '../../service/api';
+import InputMask from "react-input-mask";
+import * as Yup from "yup";
 import { useFormik, FormikHelpers } from 'formik';
 import { useEffect, useContext } from 'react';
 
 import { AddressContext } from '../../context/AddressContext';
 
-import { TitlePage, LabelForm } from '../../global.style';
+import { TitlePage, LabelForm, DivError } from '../../global.style';
 import { ContainerPage, ContainerList, DivInput, InputForm } from '../Users/Users.style';
 import { TableAddress, FormAddress, GridInputsAddress, ButtonRegister, SelectAddress } from './Address.style';
 import { CepDTO } from '../../model/CepDTO';
@@ -33,6 +35,37 @@ const Address = () => {
       numero: '',
       pais: ''
     },
+    validationSchema: Yup.object({
+      cep: Yup.string()
+        .required('Favor preencha o campo '),
+      logradouro: Yup.string()
+        .min(3, 'muito curto')
+        .max(50, 'muito longo')
+        .required('Favor preencha o campo '),
+      complemento: Yup.string()
+        .min(3, 'muito curto')
+        .max(30, 'muito longo'),
+      bairro: Yup.string()
+        .min(2, 'muito curto')
+        .max(30, 'muito longo')
+        .required('Favor preencha o campo '),
+      localidade: Yup.string()
+        .min(2, 'muito curto')
+        .max(50, 'muito longo')
+        .required('Favor preencha o campo '),
+      uf: Yup.string()
+        .min(2, 'muito curto')
+        .max(3, 'muito longo')
+        .required('Favor preencha o campo '),
+      numero: Yup.string()
+        .min(1, 'muito curto')
+        .max(6, 'muito longo')
+        .required('Favor preencha o campo '),
+      pais: Yup.string()
+        .min(3, 'muito curto')
+        .max(30, 'muito longo')
+        .required('Favor preencha o campo '),
+    }),
     onSubmit: (values:CepDTO, { setSubmitting }: FormikHelpers<CepDTO>) => {
       setSubmitting(false);
       sendAddress(values);
@@ -45,7 +78,7 @@ const Address = () => {
           <GridInputsAddress>
             <DivInput>
               <LabelForm>CEP</LabelForm>
-              <InputForm id="cep" name="cep" placeholder="Digite seu CEP" value={formikProps.values.cep} onChange={formikProps.handleChange} onBlur={ () => getAddress(formikProps.values.cep, formikProps) } />
+              <InputForm id="cep" as={InputMask} mask="99999-999" name="cep" placeholder="Digite seu CEP" value={formikProps.values.cep} onChange={formikProps.handleChange} onBlur={ () => getAddress(formikProps.values.cep, formikProps) } />
             </DivInput>
 
             <DivInput>

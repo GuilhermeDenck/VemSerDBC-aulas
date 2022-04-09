@@ -1,12 +1,17 @@
 import { useEffect, useContext } from "react";
 import { PersonContext } from "../../context/PersonContext";
-import api from '../../service/api'
+
+import Notiflix from "notiflix";
+import moment from "moment";
+import api from '../../service/api';
+import * as Yup from "yup";
+import InputMask from "react-input-mask";
 
 import { useFormik } from "formik";
 import { UserDTO } from "../../model/PersonDTO";
 
 import List from './List'
-import { TitlePage, LabelForm } from '../../global.style'
+import { TitlePage, LabelForm, DivError } from '../../global.style'
 import { ContainerPage, TablePersons, ContainerList, FormUser, GridInputs, DivInput, InputForm, ButtonSend } from './Users.style';
 const Users = () => {
 
@@ -21,17 +26,41 @@ const Users = () => {
   },[]);
 
   const createNewPerson = async (values: UserDTO) => {
-    console.log(values);
+
+    const cpf = values.cpf.replace(/\D/g, '');
+    const birthDate = moment(values.dataNascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
+    
+    const PersonObj = {
+      nome: values.nome,
+      email: values.email,
+      cpf: cpf,
+      dataNascimento: birthDate,
+    }
+
+    console.log(PersonObj);
+
     try {
-      const {data} = await api.post('/pessoa', values);
-      console.log(data);
-      
+      const {data} = await api.post('/pessoa', PersonObj);
+
+      Notiflix.Notify.success("Usuário adiciondo com sucesso!");
     } catch (error) {
+      Notiflix.Notify.failure(
+        "Ocorreu um erro ao adicionar o usuário tente novamente!"
+      );
       console.log(error);
     }
 
     getPersons();
   }
+
+  // const SignupSchema = Yup.object({
+  //   nome: Yup.string()
+  //     .min(3, "Nome deve ter no mínimo 3 caracteres")
+  //     .required("O nome é obrigatório"),
+  //   email: Yup.string().email("Digite um e-mail válido").required("O e-mail é obrigatório"),
+  //   cpf: Yup.string().required("O CPF é obrigatório"),
+  //   dataNascimento: Yup.string().required("A data de nascimento é obrigatória"),
+  // });
 
   const formikProps = useFormik({
     initialValues: {
@@ -61,12 +90,12 @@ const Users = () => {
 
           <DivInput>
             <LabelForm>CPF</LabelForm>
-            <InputForm id="cpf" name="cpf" placeholder="Digite seu Cpf" value={formikProps.values.cpf} onChange={formikProps.handleChange} />
+            <InputForm id="cpf" name="cpf" as={InputMask} mask="999.999.999-99" placeholder="Digite seu Cpf" value={formikProps.values.cpf} onChange={formikProps.handleChange} />
           </DivInput>
 
           <DivInput>
             <LabelForm>Data de Nascimento</LabelForm>
-            <InputForm id="dataNascimento" name="dataNascimento" placeholder="Digite seu Data de Nascimento" value={formikProps.values.dataNascimento} onChange={formikProps.handleChange} />
+            <InputForm id="dataNascimento" as={InputMask} mask="99/99/9999" name="dataNascimento" placeholder="Digite seu Data de Nascimento" value={formikProps.values.dataNascimento} onChange={formikProps.handleChange} />
           </DivInput>
         </GridInputs>
         <ButtonSend type="submit"> Cadastrar Pessoa </ButtonSend>

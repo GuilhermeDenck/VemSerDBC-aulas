@@ -1,19 +1,26 @@
-import ListAddress from './ListAddress';
 import api from '../../service/api';
 import InputMask from "react-input-mask";
 import * as Yup from "yup";
+import Notiflix from "notiflix";
 import { useFormik, FormikHelpers } from 'formik';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 
 import { AddressContext } from '../../context/AddressContext';
 
 import { TitlePage, LabelForm, DivError } from '../../global.style';
 import { ContainerPage, ContainerList, DivInput, InputForm } from '../Users/Users.style';
-import { TableAddress, FormAddress, GridInputsAddress, ButtonRegister, SelectAddress } from './Address.style';
+import { TableAddress, FormAddress, GridInputsAddress, ButtonRegister, SelectAddress, ListAddressDiv } from './Address.style';
 import { CepDTO } from '../../model/CepDTO';
+import { ButtonOptions } from '../../components';
+
+import BtnUpdate from '../../images/btnUpdate.svg';
+import BtnDelete from '../../images/btnDelete.svg';
 const Address = () => {
 
-  const { address, getAllAddress, getAddress, sendAddress } = useContext<any>(AddressContext);
+  const { address, getAllAddress, getAddress, deleteAddress } = useContext<any>(AddressContext);
+
+  const [ update, setUpdate ] = useState(false);
+  const [ id, setId ] = useState<number>(0);
 
   const hasToken = localStorage.getItem("token");
   useEffect( () => {
@@ -22,6 +29,83 @@ const Address = () => {
     }
     getAllAddress();
   },[]);
+
+  const maskCep = (cep:string) => {
+    return cep.replace(/(\d{5})(\d{3})/, '$1-$2');
+  }
+  
+  const sendAddress = async (values: CepDTO ) => {    
+    try {
+      const { cep, logradouro, complemento, localidade, uf, tipo, numero, pais } = values;
+
+      const newAddress = {
+        cep: cep.replace(/-/g, ''),
+        cidade: localidade,
+        complemento: complemento,
+        estado: uf,
+        logradouro: logradouro,
+        numero: parseInt(numero),
+        pais: pais,
+        tipo: tipo
+      }
+
+      const { data } = await api.post(`/endereco/${648}`, newAddress);
+      Notiflix.Notify.success('Endereço cadastrado com sucesso!');
+    } catch (error) {
+      Notiflix.Notify.failure('Ocorreu um erro ao cadastrar este endereço!');
+      console.log(error);
+    }
+
+    getAllAddress();
+  }
+
+  const alterAddress = async (idAddress: number) => {
+    try {
+      const { data } = await api.get(`/endereco/${idAddress}`);
+      setId(idAddress);
+      setUpdate(true);     
+      
+      formikProps.setFieldValue('cep', data.cep);
+      formikProps.setFieldValue('logradouro', data.logradouro);
+      formikProps.setFieldValue('localidade', data.cidade);
+      formikProps.setFieldValue('uf', data.estado);
+      formikProps.setFieldValue('tipo', data.tipo);
+      formikProps.setFieldValue('numero', data.numero);
+      formikProps.setFieldValue('pais', data.pais);
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(update);
+  }
+
+  const updateAddress = async (values: CepDTO) => {
+    try {
+      const newAddress = {
+        idEndereco: id,
+        cep: values.cep.replace(/-/g, ''),
+        logradouro: values.logradouro,
+        cidade: values.localidade,
+        estado: values.uf,
+        numero: parseInt(values.numero),
+        pais: values.pais,
+        tipo: values.tipo
+      }
+
+      console.log(newAddress);
+      
+      const { data } = await api.put(`/endereco/${id}`, newAddress);
+      Notiflix.Notify.success('Endereço cadastrado com sucesso!');
+    } catch (error) {
+      Notiflix.Notify.failure('Ocorreu um erro ao cadastrar este endereço!');
+      console.log(error);
+    }
+    formikProps.resetForm();
+    formikProps.setFieldValue('localidade', 'RESIDENCIAL');
+    getAllAddress();
+    setUpdate(false);
+  }
+
 
   const formikProps = useFormik({
     initialValues: {
@@ -35,40 +119,13 @@ const Address = () => {
       numero: '',
       pais: ''
     },
-    validationSchema: Yup.object({
-      cep: Yup.string()
-        .required('Favor preencha o campo '),
-      logradouro: Yup.string()
-        .min(3, 'muito curto')
-        .max(50, 'muito longo')
-        .required('Favor preencha o campo '),
-      complemento: Yup.string()
-        .min(3, 'muito curto')
-        .max(30, 'muito longo'),
-      bairro: Yup.string()
-        .min(2, 'muito curto')
-        .max(30, 'muito longo')
-        .required('Favor preencha o campo '),
-      localidade: Yup.string()
-        .min(2, 'muito curto')
-        .max(50, 'muito longo')
-        .required('Favor preencha o campo '),
-      uf: Yup.string()
-        .min(2, 'muito curto')
-        .max(3, 'muito longo')
-        .required('Favor preencha o campo '),
-      numero: Yup.string()
-        .min(1, 'muito curto')
-        .max(6, 'muito longo')
-        .required('Favor preencha o campo '),
-      pais: Yup.string()
-        .min(3, 'muito curto')
-        .max(30, 'muito longo')
-        .required('Favor preencha o campo '),
-    }),
     onSubmit: (values:CepDTO, { setSubmitting }: FormikHelpers<CepDTO>) => {
       setSubmitting(false);
-      sendAddress(values);
+      if(update) {
+        updateAddress(values);
+      } else {
+        sendAddress(values);
+      }      
     },
   });
 
@@ -120,7 +177,7 @@ const Address = () => {
             </DivInput>
 
           </GridInputsAddress>
-          <ButtonRegister type='submit'> Registrar Endereço </ButtonRegister>
+          <ButtonRegister type="submit"> { update ? 'Atualizar Endereço' : 'Registrar Endereço' }  </ButtonRegister>
         </FormAddress>
         <TitlePage> Address </TitlePage>
         <ContainerList>
@@ -135,7 +192,21 @@ const Address = () => {
             <span> Atualizar </span>
             <span> Deletar </span>
           </TableAddress>
-          <ListAddress address={address}/>
+          {
+            address.map( (a:any) => (
+              <ListAddressDiv key={a.idEndereco}>
+                <p> {a.logradouro} </p>
+                <p> {a.numero} </p>
+                <p> {a.tipo} </p>
+                <p> {maskCep(a.cep)} </p>
+                <p> {a.cidade} </p>
+                <p> {a.estado} </p>
+                <p> {a.pais} </p>
+                <ButtonOptions onClick={ () => alterAddress(a.idEndereco) } color={'#FEC400'} img={BtnUpdate} text={'botão para alterar'} />
+                <ButtonOptions onClick={ () => deleteAddress(a.idEndereco) } color={'#F12B2C'} img={BtnDelete} text={'botão para deletar'} />
+              </ListAddressDiv>
+            ))
+          }
         </ContainerList>
     </ContainerPage>
   )

@@ -22,7 +22,7 @@ const Users = () => {
   const hasToken = localStorage.getItem("token");
 
   const [ update, setUpdate ] = useState(false);
-  const [ id, setId ] = useState(0);
+  const [ id, setId ] = useState<number>(0);
 
   useEffect( () => {
     if (hasToken) {
@@ -54,19 +54,12 @@ const Users = () => {
       console.log(error);
     }
 
-    clearInputs(formikProps);
+    formikProps.resetForm();
     getPersons();
   }
 
   const maskCPF = (cpf: string) => {
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
-  }
-
-  const clearInputs = ( formikProps: any ) => {
-    formikProps.setFieldValue('nome', '');
-    formikProps.setFieldValue('email', '');
-    formikProps.setFieldValue('cpf', '');
-    formikProps.setFieldValue('dataNascimento', '');
   }
 
   const alterPerson = async (id: number, formikProps: any) => {
@@ -83,9 +76,7 @@ const Users = () => {
     }
   }
 
-  const updatePerson = async (values: UserDTO, formikProps: any) => {
-    console.log('entrei no update');
-    
+  const updatePerson = async (values: UserDTO) => {
     const cpf = values.cpf.replace(/\D/g, '');
     const birthDate = moment(values.dataNascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
     
@@ -108,7 +99,7 @@ const Users = () => {
       console.log(error);
     }
 
-    clearInputs(formikProps);
+    formikProps.resetForm();
     getPersons();
     setUpdate(false);
   }
@@ -131,7 +122,7 @@ const Users = () => {
     },
     onSubmit: values => {
       if(update) {
-        updatePerson(values, formikProps);
+        updatePerson(values);
       } else {
         createNewPerson(values);  
       } 

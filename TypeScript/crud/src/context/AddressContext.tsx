@@ -60,32 +60,8 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
 
   }
 
-  const sendAddress = async (values: CepDTO) => {    
-    try {
-      const { cep, logradouro, complemento, localidade, uf, tipo, numero, pais } = values;
-
-      const newAddress = {
-        cep: cep.replace(/-/g, ''),
-        cidade: localidade,
-        complemento: complemento,
-        estado: uf,
-        logradouro: logradouro,
-        numero: parseInt(numero),
-        pais: pais,
-        tipo: tipo
-      }
-
-      const { data } = await api.post(`/endereco/${648}`, newAddress);
-      Notiflix.Notify.success('Endereço cadastrado com sucesso!');
-    } catch (error) {
-      Notiflix.Notify.failure('Ocorreu um erro ao cadastrar este endereço!');
-      console.log(error);
-    }
-    getAllAddress();
-  }
-
   return (
-    <AddressContext.Provider value={{ getAddress, getAllAddress, deleteAddress, sendAddress, address }}>
+    <AddressContext.Provider value={{ getAddress, getAllAddress, deleteAddress, address }}>
       {children}
     </AddressContext.Provider>
   )

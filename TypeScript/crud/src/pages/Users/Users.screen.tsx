@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { PersonContext } from "../../context/PersonContext";
 
 import Notiflix from "notiflix";
@@ -8,15 +8,21 @@ import * as Yup from "yup";
 import InputMask from "react-input-mask";
 
 import { useFormik } from "formik";
-import { UserDTO } from "../../model/PersonDTO";
+import { PersonDTO, UserDTO } from "../../model/PersonDTO";
 
-import List from './List'
+import BtnUpdate from '../../images/btnUpdate.svg';
+import BtnDelete from '../../images/btnDelete.svg';
+import { ButtonOptions } from '../../components';
+
 import { TitlePage, LabelForm, DivError } from '../../global.style'
-import { ContainerPage, TablePersons, ContainerList, FormUser, GridInputs, DivInput, InputForm, ButtonSend } from './Users.style';
+import { ContainerPage, TablePersons, ContainerList, FormUser, GridInputs, DivInput, InputForm, ButtonSend, ListPersons } from './Users.style';
 const Users = () => {
 
-  const { getPersons, persons } = useContext<any>(PersonContext);
+  const { getPersons, persons, deletePerson } = useContext<any>(PersonContext);
   const hasToken = localStorage.getItem("token");
+
+  const [ update, setUpdate ] = useState(false);
+  const [ id, setId ] = useState(0);
 
   useEffect( () => {
     if (hasToken) {
@@ -37,8 +43,6 @@ const Users = () => {
       dataNascimento: birthDate,
     }
 
-    console.log(PersonObj);
-
     try {
       const {data} = await api.post('/pessoa', PersonObj);
 
@@ -50,7 +54,63 @@ const Users = () => {
       console.log(error);
     }
 
+    clearInputs(formikProps);
     getPersons();
+  }
+
+  const maskCPF = (cpf: string) => {
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
+  }
+
+  const clearInputs = ( formikProps: any ) => {
+    formikProps.setFieldValue('nome', '');
+    formikProps.setFieldValue('email', '');
+    formikProps.setFieldValue('cpf', '');
+    formikProps.setFieldValue('dataNascimento', '');
+  }
+
+  const alterPerson = async (id: number, formikProps: any) => {
+    try {
+      const { data } = await api.get(`/pessoa/{idPessoa}?idPessoa=${id}`);
+      setId(id);
+      setUpdate(true);
+      formikProps.setFieldValue('nome', data.nome);
+      formikProps.setFieldValue('email', data.email);
+      formikProps.setFieldValue('cpf', maskCPF(data.cpf));
+      formikProps.setFieldValue('dataNascimento', moment(data.dataNascimento).format("DD/MM/YYYY"));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const updatePerson = async (values: UserDTO, formikProps: any) => {
+    console.log('entrei no update');
+    
+    const cpf = values.cpf.replace(/\D/g, '');
+    const birthDate = moment(values.dataNascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
+    
+    const PersonObj = {
+      idPessoa: id,
+      nome: values.nome,
+      email: values.email,
+      cpf: cpf,
+      dataNascimento: birthDate,
+    }
+
+    try {
+      const {data} = await api.put(`/pessoa/${id}`, PersonObj);
+
+      Notiflix.Notify.success("Usuário alterado com sucesso!");
+    } catch (error) {
+      Notiflix.Notify.failure(
+        "Ocorreu um erro ao alterar o usuário tente novamente!"
+      );
+      console.log(error);
+    }
+
+    clearInputs(formikProps);
+    getPersons();
+    setUpdate(false);
   }
 
   // const SignupSchema = Yup.object({
@@ -70,7 +130,11 @@ const Users = () => {
       dataNascimento: ""
     },
     onSubmit: values => {
-      createNewPerson(values);
+      if(update) {
+        updatePerson(values, formikProps);
+      } else {
+        createNewPerson(values);  
+      } 
     },
   });
     
@@ -98,7 +162,7 @@ const Users = () => {
             <InputForm id="dataNascimento" as={InputMask} mask="99/99/9999" name="dataNascimento" placeholder="Digite seu Data de Nascimento" value={formikProps.values.dataNascimento} onChange={formikProps.handleChange} />
           </DivInput>
         </GridInputs>
-        <ButtonSend type="submit"> Cadastrar Pessoa </ButtonSend>
+        <ButtonSend type="submit"> { update ? 'Alterar Pessoa' : 'Cadastrar Pessoa' }  </ButtonSend>
       </FormUser>
       <TitlePage> Persons </TitlePage>
       <ContainerList>
@@ -110,7 +174,18 @@ const Users = () => {
           <span> Atualizar </span>
           <span> Deletar </span>
         </TablePersons>
-        <List persons={persons}/>
+        {
+          persons.map( (p: any) => (
+            <ListPersons key={p.idPessoa}>
+                <p> {p.nome} </p>
+                <p> {moment(p.dataNascimento).format('DD/MM/YYYY')} </p>
+                <p> {maskCPF(p.cpf)} </p>
+                <p> {p.email} </p>
+                <ButtonOptions onClick={ () => alterPerson(p.idPessoa, formikProps) } color={'#FEC400'} img={BtnUpdate} text={'botão para alterar'} />
+                <ButtonOptions onClick={ () => deletePerson(p.idPessoa) } color={'#F12B2C'} img={BtnDelete} text={'botão para deletar'}/>
+            </ListPersons>
+          ) )
+      }
       </ContainerList>
     </ContainerPage>
   )

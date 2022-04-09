@@ -12,6 +12,7 @@ export interface PersonDTO {
 }
 
 export interface UserDTO {
+  idPessoa?: number,
   cpf: string;
   dataNascimento: string;
   email: string;

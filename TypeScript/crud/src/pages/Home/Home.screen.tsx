@@ -1,19 +1,18 @@
-import { 
-  Card,
-  Container,
-  CardTitle
-} from "./Home.styles";
-import api from "../../service/api";
-import { useEffect, useContext } from "react";
+import CountUp from 'react-countup';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useContext } from "react";
+
+import api from "../../service/api";
+
 import { AddressContext } from '../../context/AddressContext';
 import { PersonContext } from "../../context/PersonContext";
 
+import { ScreenWarning } from "../../components";
+
+import { Card, Container, CardTitle } from "./Home.styles";
+
 import Error from '../../images/error.gif';
 import Loader from '../../images/loader.gif';
-
-import CountUp from 'react-countup';
-import { ScreenWarning } from "../../components";
 const Home = () => {
 
   const navigate = useNavigate();

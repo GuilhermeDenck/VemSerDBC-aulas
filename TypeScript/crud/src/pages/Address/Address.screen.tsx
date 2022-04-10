@@ -1,21 +1,22 @@
-import api from '../../service/api';
-import InputMask from "react-input-mask";
 import * as Yup from "yup";
+import InputMask from "react-input-mask";
 import Notiflix from "notiflix";
 import { useFormik, FormikHelpers } from 'formik';
 import { useEffect, useContext, useState } from 'react';
 
+import api from '../../service/api';
+import { CepDTO } from '../../model/CepDTO';
+
 import { AddressContext } from '../../context/AddressContext';
+
+import { ButtonOptions, ScreenWarning } from '../../components';
 
 import { TitlePage, LabelForm, DivError } from '../../global.style';
 import { ContainerPage, ContainerList, DivInput, InputForm } from '../Users/Users.style';
 import { TableAddress, FormAddress, GridInputsAddress, ButtonRegister, SelectAddress, ListAddressDiv } from './Address.style';
-import { CepDTO } from '../../model/CepDTO';
-import { ButtonOptions, ScreenWarning } from '../../components';
 
 import Error from '../../images/error.gif';
 import Loader from '../../images/loader.gif'
-
 import BtnUpdate from '../../images/btnUpdate.svg';
 import BtnDelete from '../../images/btnDelete.svg';
 const Address = () => {

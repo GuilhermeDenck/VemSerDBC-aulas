@@ -1,13 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
 import {Formik, Field, Form, FormikHelpers} from 'formik';
-import { LoginDTO } from '../../model/LoginDTO';
-import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
-import VemSerColorido from '../../images/VemSerColorido.png'
-import eye from '../../images/active.svg'
+import { useContext, useEffect, useState } from 'react';
+
+import { LoginDTO } from '../../model/LoginDTO';
+
+import { AuthContext } from '../../context/AuthContext';
 
 import { LabelForm } from '../../global.style'
 import { ContainerLogin, TitleForm, DivForm, DivInput, InputLogin, ButtonLogin, DivSignUp } from './Login.styles';
+
+import eye from '../../images/active.svg'
+import VemSerColorido from '../../images/VemSerColorido.png'
 const Login = () => {
 
   const navigate = useNavigate();

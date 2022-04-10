@@ -1,24 +1,24 @@
-import { useEffect, useContext, useState } from "react";
-import { PersonContext } from "../../context/PersonContext";
-
-import Notiflix from "notiflix";
-import moment from "moment";
-import api from '../../service/api';
 import * as Yup from "yup";
+import moment from "moment";
+import Notiflix from "notiflix";
 import InputMask from "react-input-mask";
-
 import { useFormik } from "formik";
+import { useEffect, useContext, useState } from "react";
+
+import api from '../../service/api';
 import { UserDTO } from "../../model/PersonDTO";
 
-import Error from '../../images/error.gif';
-import Loader from '../../images/loader.gif'
+import { PersonContext } from "../../context/PersonContext";
 
-import BtnUpdate from '../../images/btnUpdate.svg';
-import BtnDelete from '../../images/btnDelete.svg';
 import { ButtonOptions, ScreenWarning } from '../../components';
 
 import { TitlePage, LabelForm, DivError } from '../../global.style'
 import { ContainerPage, TablePersons, ContainerList, FormUser, GridInputs, DivInput, InputForm, ButtonSend, ListPersons } from './Users.style';
+
+import Error from '../../images/error.gif';
+import Loader from '../../images/loader.gif'
+import BtnUpdate from '../../images/btnUpdate.svg';
+import BtnDelete from '../../images/btnDelete.svg';
 const Users = () => {
 
   const { getPersons, persons, deletePerson, errorPerson, loadingPerson } = useContext<any>(PersonContext);

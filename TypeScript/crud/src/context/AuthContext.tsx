@@ -1,7 +1,10 @@
-import { FC, createContext, useEffect, useState, ReactNode } from 'react';
-import { LoginDTO } from '../model/LoginDTO';
+import Notiflix from "notiflix";
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { useNavigate } from "react-router-dom";
+import { FC, createContext, useEffect, useState, ReactNode } from 'react';
+
 import api from '../service/api'
+import { LoginDTO } from '../model/LoginDTO';
 
 export const AuthContext = createContext({});
 
@@ -14,6 +17,7 @@ const AuthProvider: FC<ReactNode> = ({children }) => {
   const navigate = useNavigate();
 
   const handleLogin = async (user: LoginDTO) => {
+    Loading.circle();
     try {
       const {data} = await api.post('/auth', user);
       localStorage.setItem('token', data);
@@ -22,14 +26,18 @@ const AuthProvider: FC<ReactNode> = ({children }) => {
       setHasToken(true);
       navigate('/');
     } catch (error) {
+      Notiflix.Notify.failure('Ocorreu um erro ao tentar logar');
       console.log(error);
     }
+    Loading.remove();
   }
 
   const handleLogout = () => {
+    Loading.circle();
     localStorage.removeItem('token');
     setHasToken(false);
     navigate('/login');
+    Loading.remove();
   }
 
   const isLogged = () => {

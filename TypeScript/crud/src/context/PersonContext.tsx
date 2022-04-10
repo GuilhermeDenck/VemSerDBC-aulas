@@ -1,7 +1,9 @@
-import { FC, createContext, useState, useEffect, ReactNode } from 'react';
-import { PersonDTO } from '../model/PersonDTO';
-import api from '../service/api';
 import Notiflix from "notiflix";
+import { Loading } from "notiflix/build/notiflix-loading-aio";
+import { FC, createContext, useState, useEffect, ReactNode } from 'react';
+
+import api from '../service/api';
+import { PersonDTO } from '../model/PersonDTO';
 
 export const PersonContext = createContext({});
 
@@ -30,14 +32,17 @@ const PersonProvider: FC<ReactNode> = ({ children }) => {
       'Sim',
       'Não',
       async function confirmButton() {
+          Loading.circle();
           try {
-              await api.delete(`/pessoa/${id}`)
-              Notiflix.Notify.success('Você excluiu esse usuário!');
-              getPersons();
+            await api.delete(`/pessoa/${id}`)
+            Notiflix.Notify.success('Você excluiu esse usuário!');
           } catch (error) {
-              Notiflix.Notify.failure('Ocorreu um erro ao excluir este usuário!');
-              console.log(error)
-          }  
+            Notiflix.Notify.failure('Ocorreu um erro ao excluir este usuário!');
+            console.log(error)
+          } finally {
+            Loading.remove();
+            getPersons();
+          }
       },
       function cancelButton() {
           Notiflix.Notify.warning('Operação cancelada');

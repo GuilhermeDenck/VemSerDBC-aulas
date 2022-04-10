@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 import moment from "moment";
 import Notiflix from "notiflix";
+import { Loading } from "notiflix/build/notiflix-loading-aio";
 import InputMask from "react-input-mask";
 import { useFormik } from "formik";
 import { useEffect, useContext, useState } from "react";
@@ -35,7 +36,7 @@ const Users = () => {
   },[]);
 
   const createNewPerson = async (values: UserDTO) => {
-
+    Loading.circle();
     const cpf = values.cpf.replace(/\D/g, '');
     const birthDate = moment(values.dataNascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
     
@@ -48,17 +49,17 @@ const Users = () => {
 
     try {
       const {data} = await api.post('/pessoa', PersonObj);
-
-      Notiflix.Notify.success("Usuário adiciondo com sucesso!");
+      Notiflix.Notify.success("Usuário adicionado com sucesso!");
     } catch (error) {
       Notiflix.Notify.failure(
         "Ocorreu um erro ao adicionar o usuário tente novamente!"
       );
       console.log(error);
+    } finally {
+      formikProps.resetForm();
+      getPersons();
+      Loading.remove();
     }
-
-    formikProps.resetForm();
-    getPersons();
   }
 
   const maskCPF = (cpf: string) => {
@@ -66,6 +67,7 @@ const Users = () => {
   }
 
   const alterPerson = async (id: number, formikProps: any) => {
+    Loading.circle();
     try {
       const { data } = await api.get(`/pessoa/{idPessoa}?idPessoa=${id}`);
       setId(id);
@@ -76,10 +78,13 @@ const Users = () => {
       formikProps.setFieldValue('dataNascimento', moment(data.dataNascimento).format("DD/MM/YYYY"));
     } catch (error) {
       console.log(error);
+    } finally {
+      Loading.remove();
     }
   }
 
   const updatePerson = async (values: UserDTO) => {
+    Loading.circle();
     const cpf = values.cpf.replace(/\D/g, '');
     const birthDate = moment(values.dataNascimento, "DD/MM/YYYY").format("YYYY-MM-DD");
     
@@ -100,11 +105,12 @@ const Users = () => {
         "Ocorreu um erro ao alterar o usuário tente novamente!"
       );
       console.log(error);
+    } finally {
+      formikProps.resetForm();
+      getPersons();
+      setUpdate(false);
+      Loading.remove();
     }
-
-    formikProps.resetForm();
-    getPersons();
-    setUpdate(false);
   }
 
   const msgRequired = 'Você precisa preencher esse campo';

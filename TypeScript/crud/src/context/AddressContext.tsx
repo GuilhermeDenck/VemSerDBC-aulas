@@ -1,9 +1,11 @@
+import axios from 'axios';
+import Notiflix from "notiflix";
+import { Loading } from "notiflix/build/notiflix-loading-aio";
 import { FC, createContext, useState, ReactNode } from 'react';
+
 import { AddressDTO } from '../model/AddressDTO';
 import { CepDTO } from '../model/CepDTO';
-import axios from 'axios';
 import api from '../service/api';
-import Notiflix from "notiflix";
 
 export const AddressContext = createContext({});
 
@@ -14,6 +16,7 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
   const [ errorAddress, setError ] = useState(false);
 
   const getAddress = async (values: CepDTO, formikProps: any) => {
+    Loading.circle();
     try {
       const {data} = await axios.get(`https://viacep.com.br/ws/${values}/json/`);
       formikProps.setFieldValue('logradouro', data.logradouro);
@@ -23,6 +26,8 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
       formikProps.setFieldValue('uf', data.uf);
     } catch (error) {
       console.log(error);
+    } finally {
+      Loading.remove();
     }
   }
 
@@ -45,14 +50,17 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
       'Sim',
       'Não',
       async function confirmButton() {
+          Loading.circle();
           try {
               await api.delete(`/endereco/${id}`)
               Notiflix.Notify.success('Você excluiu esse endereço!');
-              getAllAddress();
-          } catch (error) {
+            } catch (error) {
               Notiflix.Notify.failure('Ocorreu um erro ao excluir este endereço!');
               console.log(error)
-          }  
+            } finally {
+              getAllAddress();
+              Loading.remove();
+            }
       },
       function cancelButton() {
           Notiflix.Notify.warning('Operação cancelada');

@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import InputMask from "react-input-mask";
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import Notiflix from "notiflix";
 import { useFormik, FormikHelpers } from 'formik';
 import { useEffect, useContext, useState } from 'react';
@@ -39,6 +40,7 @@ const Address = () => {
   }
   
   const sendAddress = async (values: CepDTO ) => {    
+    Loading.circle();
     try {
       const { cep, logradouro, complemento, localidade, uf, tipo, numero, pais } = values;
 
@@ -58,12 +60,16 @@ const Address = () => {
     } catch (error) {
       Notiflix.Notify.failure('Ocorreu um erro ao cadastrar este endereço!');
       console.log(error);
+    } finally {
+      formikProps.resetForm();
+      formikProps.setFieldValue('localidade', 'RESIDENCIAL');
+      getAllAddress();
+      Loading.remove();
     }
-
-    getAllAddress();
   }
 
   const alterAddress = async (idAddress: number) => {
+    Loading.circle();
     try {
       const { data } = await api.get(`/endereco/${idAddress}`);
       setId(idAddress);
@@ -78,12 +84,13 @@ const Address = () => {
       formikProps.setFieldValue('pais', data.pais);
     } catch (error) {
       console.log(error);
+    } finally {
+      Loading.remove();
     }
-
-    console.log(update);
   }
 
   const updateAddress = async (values: CepDTO) => {
+    Loading.circle();
     try {
       const newAddress = {
         idEndereco: id,
@@ -95,19 +102,19 @@ const Address = () => {
         pais: values.pais,
         tipo: values.tipo
       }
-
-      console.log(newAddress);
       
       const { data } = await api.put(`/endereco/${id}`, newAddress);
       Notiflix.Notify.success('Endereço cadastrado com sucesso!');
     } catch (error) {
       Notiflix.Notify.failure('Ocorreu um erro ao cadastrar este endereço!');
       console.log(error);
+    } finally {
+      formikProps.resetForm();
+      formikProps.setFieldValue('localidade', 'RESIDENCIAL');
+      getAllAddress();
+      setUpdate(false);
+      Loading.remove();
     }
-    formikProps.resetForm();
-    formikProps.setFieldValue('localidade', 'RESIDENCIAL');
-    getAllAddress();
-    setUpdate(false);
   }
 
   const msgRequired = 'Você precisa preencher esse campo';

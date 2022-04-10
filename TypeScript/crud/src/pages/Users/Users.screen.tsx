@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import InputMask from "react-input-mask";
 
 import { useFormik } from "formik";
-import { PersonDTO, UserDTO } from "../../model/PersonDTO";
+import { UserDTO } from "../../model/PersonDTO";
 
 import BtnUpdate from '../../images/btnUpdate.svg';
 import BtnDelete from '../../images/btnDelete.svg';
@@ -104,15 +104,7 @@ const Users = () => {
     setUpdate(false);
   }
 
-  // const SignupSchema = Yup.object({
-  //   nome: Yup.string()
-  //     .min(3, "Nome deve ter no mínimo 3 caracteres")
-  //     .required("O nome é obrigatório"),
-  //   email: Yup.string().email("Digite um e-mail válido").required("O e-mail é obrigatório"),
-  //   cpf: Yup.string().required("O CPF é obrigatório"),
-  //   dataNascimento: Yup.string().required("A data de nascimento é obrigatória"),
-  // });
-
+  const msgRequired = 'Você precisa preencher esse campo';
   const formikProps = useFormik({
     initialValues: {
       nome: "",
@@ -120,6 +112,17 @@ const Users = () => {
       cpf: "",
       dataNascimento: ""
     },
+    validationSchema: Yup.object({
+      nome: Yup.string()
+        .min(2, "muito curto")
+        .max(50, "muito extenso")
+        .required(msgRequired),
+      email: Yup.string()
+        .email("Este campo precisa ser um email.")
+        .required(msgRequired),
+      cpf: Yup.string().required(msgRequired),
+      dataNascimento: Yup.string().required(msgRequired),
+    }),
     onSubmit: values => {
       if(update) {
         updatePerson(values);
@@ -136,21 +139,25 @@ const Users = () => {
           <DivInput>
             <LabelForm>Nome</LabelForm>
             <InputForm id="nome" name="nome" placeholder="Digite seu nome" value={formikProps.values.nome} onChange={formikProps.handleChange} />
+            {formikProps.errors.nome && formikProps.touched.nome ? ( <DivError>{formikProps.errors.nome}</DivError> ) : null}
           </DivInput>
 
           <DivInput>
             <LabelForm>E-mail</LabelForm>
             <InputForm id="email" name="email" placeholder="Digite seu E-mail" value={formikProps.values.email} onChange={formikProps.handleChange} />
+            {formikProps.errors.email && formikProps.touched.email ? ( <DivError>{formikProps.errors.email}</DivError> ) : null}
           </DivInput>
 
           <DivInput>
             <LabelForm>CPF</LabelForm>
             <InputForm id="cpf" name="cpf" as={InputMask} mask="999.999.999-99" placeholder="Digite seu Cpf" value={formikProps.values.cpf} onChange={formikProps.handleChange} />
+            {formikProps.errors.cpf && formikProps.touched.cpf ? ( <DivError>{formikProps.errors.cpf}</DivError> ) : null}
           </DivInput>
 
           <DivInput>
             <LabelForm>Data de Nascimento</LabelForm>
             <InputForm id="dataNascimento" as={InputMask} mask="99/99/9999" name="dataNascimento" placeholder="Digite seu Data de Nascimento" value={formikProps.values.dataNascimento} onChange={formikProps.handleChange} />
+            {formikProps.errors.dataNascimento && formikProps.touched.dataNascimento ? ( <DivError>{formikProps.errors.dataNascimento}</DivError> ) : null}
           </DivInput>
         </GridInputs>
         <ButtonSend type="submit"> { update ? 'Alterar Pessoa' : 'Cadastrar Pessoa' }  </ButtonSend>

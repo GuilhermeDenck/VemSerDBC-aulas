@@ -11,13 +11,16 @@ import { TitlePage, LabelForm, DivError } from '../../global.style';
 import { ContainerPage, ContainerList, DivInput, InputForm } from '../Users/Users.style';
 import { TableAddress, FormAddress, GridInputsAddress, ButtonRegister, SelectAddress, ListAddressDiv } from './Address.style';
 import { CepDTO } from '../../model/CepDTO';
-import { ButtonOptions } from '../../components';
+import { ButtonOptions, ScreenWarning } from '../../components';
+
+import Error from '../../images/error.gif';
+import Loader from '../../images/loader.gif'
 
 import BtnUpdate from '../../images/btnUpdate.svg';
 import BtnDelete from '../../images/btnDelete.svg';
 const Address = () => {
 
-  const { address, getAllAddress, getAddress, deleteAddress } = useContext<any>(AddressContext);
+  const { address, getAllAddress, getAddress, deleteAddress, errorAddress, loadingAddress } = useContext<any>(AddressContext);
 
   const [ update, setUpdate ] = useState(false);
   const [ id, setId ] = useState<number>(0);
@@ -160,6 +163,8 @@ const Address = () => {
     },
   });
 
+  if(loadingAddress) return ( <ScreenWarning img={Loader} alt={'Carregando'}/> )
+  if(errorAddress ) return ( <ScreenWarning img={Error} alt={'Error'}/> )
   return (
       <ContainerPage>
         <FormAddress onSubmit={formikProps.handleSubmit}>

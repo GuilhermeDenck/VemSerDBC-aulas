@@ -9,13 +9,17 @@ import { useNavigate } from "react-router-dom";
 import { AddressContext } from '../../context/AddressContext';
 import { PersonContext } from "../../context/PersonContext";
 
+import Error from '../../images/error.gif';
+import Loader from '../../images/loader.gif';
+
 import CountUp from 'react-countup';
+import { ScreenWarning } from "../../components";
 const Home = () => {
 
   const navigate = useNavigate();
 
-  const { getAllAddress, address } = useContext<any>(AddressContext);
-  const { getPersons, persons } = useContext<any>(PersonContext);
+  const { getAllAddress, address, errorAddress, loadingAddress } = useContext<any>(AddressContext);
+  const { getPersons, persons, errorPerson, loadingPerson } = useContext<any>(PersonContext);
 
   const hasToken = localStorage.getItem('token');
   useEffect(() => {
@@ -27,7 +31,9 @@ const Home = () => {
     getPersons();
   }, []);
 
-  return (
+  if(loadingAddress || loadingPerson) return ( <ScreenWarning img={Loader} alt={'Carregando'}/> )
+  if(errorAddress || errorPerson ) return ( <ScreenWarning img={Error} alt={'Error'}/> )
+  return (    
     <Container>
       <Card onClick={ () => navigate('/users') }>
         <CardTitle> Total de Pessoas Registradas </CardTitle>

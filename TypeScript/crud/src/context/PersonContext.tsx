@@ -8,8 +8,8 @@ export const PersonContext = createContext({});
 const PersonProvider: FC<ReactNode> = ({ children }) => {
 
   const [persons, setPersons] = useState<PersonDTO['persons']>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [loadingPerson, setLoading] = useState(true);
+  const [errorPerson, setError] = useState(false);
 
   const getPersons = async () => {
     try {
@@ -60,7 +60,7 @@ const PersonProvider: FC<ReactNode> = ({ children }) => {
   },[])
 
   return (
-    <PersonContext.Provider value={{getPersons, deletePerson, persons}}>
+    <PersonContext.Provider value={{getPersons, deletePerson, persons, errorPerson, loadingPerson}}>
       {children}
     </PersonContext.Provider>
   )

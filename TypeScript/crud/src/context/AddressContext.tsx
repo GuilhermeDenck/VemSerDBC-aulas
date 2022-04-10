@@ -10,6 +10,8 @@ export const AddressContext = createContext({});
 const AddressProvider: FC<ReactNode> = ({ children }) => {
 
   const [ address, setAddress ] = useState<AddressDTO['address']>([]);
+  const [ loadingAddress, setLoading ] = useState(true);
+  const [ errorAddress, setError ] = useState(false);
 
   const getAddress = async (values: CepDTO, formikProps: any) => {
     try {
@@ -27,8 +29,11 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
   const getAllAddress = async () => {
     try {
       const {data} = await api.get('/endereco');
+      setLoading(false);
       setAddress(data);
     } catch (error) {
+      setLoading(false);
+      setError(true);
       console.log(error)
     }
   }
@@ -61,7 +66,7 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
   }
 
   return (
-    <AddressContext.Provider value={{ getAddress, getAllAddress, deleteAddress, address }}>
+    <AddressContext.Provider value={{ getAddress, getAllAddress, deleteAddress, address,  errorAddress, loadingAddress }}>
       {children}
     </AddressContext.Provider>
   )

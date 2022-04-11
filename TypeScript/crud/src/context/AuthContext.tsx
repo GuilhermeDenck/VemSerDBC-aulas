@@ -28,8 +28,9 @@ const AuthProvider: FC<ReactNode> = ({children }) => {
     } catch (error) {
       Notiflix.Notify.failure('Ocorreu um erro ao tentar logar');
       console.log(error);
+    } finally {
+      Loading.remove();
     }
-    Loading.remove();
   }
 
   const handleLogout = () => {
